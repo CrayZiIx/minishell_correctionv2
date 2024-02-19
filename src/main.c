@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 18:50:40 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 21:10:17 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,11 @@ int	main(int ac, char **av, char **envp)
 		signal(SIGINT, handle_sigint_cmd);
 		if (!check_args(out, &prompt))
 			break ;
-		g_global.g_state = WEXITSTATUS(g_global.g_state);
+		if (WIFEXITED(g_global.g_state))
+			g_global.g_state = WEXITSTATUS(g_global.g_state);
+		free(out);
 	}
+	rl_clear_history();
 	gc_clean(&g_global.gc);
 	exit(WEXITSTATUS(g_global.g_state));
 }

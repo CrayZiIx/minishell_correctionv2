@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 20:29:33 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:04:57 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_glob
 	t_gcan	gc;
 	int		g_state;
 	int		g_state_old;
+	int		sig_int;
 }				t_glob;
 
 typedef struct s_prompt

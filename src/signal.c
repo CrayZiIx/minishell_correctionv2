@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:28:57 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:24:27 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:32:58 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	handle_sigint_cmd(int sig)
 {
 	if (sig == SIGINT)
 	{
+		g_global.sig_int = 1;
+		rl_done = 1;
 		ft_putchar_fd('\n', STDIN_FILENO);
 		rl_replace_line("", 0);
 		rl_redisplay();

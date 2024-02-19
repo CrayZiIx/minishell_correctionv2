@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 13:02:25 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/11 18:01:17 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:20:40 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	read_until_nl(t_data *datas, char **stock)
 	while (datas->newline_index == -1)
 	{
 		datas->buf_size = read(datas->fd, datas->buf, BUFFER_SIZE);
-		if (datas->buf_size < 0)
+		
+		if (datas->buf_size < 0 )
 		{
 			free(datas->buf);
 			free(*stock);

@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:29:46 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 19:20:51 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:11:03 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ int	builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 		else if (!cmd->next && a && !ft_strncmp(*a, "unset", n) && n == 5)
 			g_global.g_state = ft_unset(prompt);
 		else
+		{
+			// signal(SIGINT, SIG_IGN);
+			// signal(SIGQUIT, SIG_IGN);
 			exec_cmd(prompt, cmd);
+		}
 		cmd = cmd->next;
 	}
 	return (g_global.g_state);
