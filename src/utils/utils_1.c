@@ -6,11 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:56:11 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 19:06:59 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:29:30 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+extern t_glob	g_global;
 
 int	ft_countchar(char *s, char c)
 {

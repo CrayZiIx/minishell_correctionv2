@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 19:27:16 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:29:55 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int		ft_cd(t_prompt *p);
 int		ft_countchar(char *s, char c);
 int		ft_strchr_i(const char *s, int c);
 int		ft_strchars_i(const char *s, char *set);
+void	*my_ptr(void *init_ptr);
+void	print_error_heredoc(char c, int *i);
 /*--[ft_matrix.c]--*/
 void	ft_free_matrix(char ***m);
 char	**ft_extend_matrix(char **in, char *newstr);
@@ -138,7 +140,6 @@ t_list	*fill_nodes(char **args, int i);
 /*--[parse_args.c]--*/
 void	*check_args(char *out, t_prompt *p);
 
-// char	*ft_getprompt(t_prompt prompt);
-void	*my_ptr(void *init_ptr);
+
 
 #endif
