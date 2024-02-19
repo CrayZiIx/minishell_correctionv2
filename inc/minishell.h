@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 19:29:55 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:29:33 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,5 @@ char	**ft_cmdtrim(char const *s, char *set);
 t_list	*fill_nodes(char **args, int i);
 /*--[parse_args.c]--*/
 void	*check_args(char *out, t_prompt *p);
-
-
 
 #endif
