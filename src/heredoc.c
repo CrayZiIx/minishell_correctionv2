@@ -6,14 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:29:43 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:24:27 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:01:00 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 extern t_glob	g_global;
-
 
 char	*get_here_str(char *s[2], size_t len, char *limit, char *warn)
 {
@@ -49,7 +48,6 @@ int	get_here_doc(char *s[2], char *aux[2])
 	}
 	s[1] = get_here_str(s, 0, aux[0], aux[1]);
 	write(fd[WRITE_END], s[1], ft_strlen(s[1]));
-	// free(s[1]);
 	close(fd[WRITE_END]);
 	if (g_global.g_state == 130)
 	{

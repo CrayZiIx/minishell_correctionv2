@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:44:47 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:37:10 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:41:36 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*get_substr_var(char *s, int i, t_prompt *prompt)
 	if (!var && s[i] == '$')
 		var = ft_itoa(prompt->pid, &g_global.gc);
 	else if (!var && s[i] == '?')
-		var = ft_itoa(g_global.g_state, &g_global.gc);
+		var = ft_itoa(g_global.g_state_old, &g_global.gc);
 	path = ft_strjoin(aux, var, &g_global.gc);
 	aux = ft_strjoin(path, &s[i + pos], &g_global.gc);
 	return (aux);

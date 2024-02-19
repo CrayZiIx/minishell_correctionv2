@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 11:36:48 by liguyon           #+#    #+#             */
-/*   Updated: 2024/02/13 19:31:40 by jolecomt         ###   ########.fr       */
+/*   Created: 2023/04/11 11:36:48 by jolecomt          #+#    #+#             */
+/*   Updated: 2024/02/19 19:26:28 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include "../gc/gc.h"
-
 
 int			ft_toupper(int c);
 int			ft_tolower(int c);
@@ -79,7 +78,8 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int			ft_printf(const char *fmt, ...);
 
 // LOGGER
-enum {
+enum
+{
 	LOGGER_DEBG,
 	LOGGER_INFO,
 	LOGGER_WARN,

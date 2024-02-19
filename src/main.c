@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:24:28 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:50:40 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static t_prompt	init_prompt(char **argv, char **envp)
 	s = NULL;
 	prompt.cmds = NULL;
 	prompt.envp = ft_dup_matrix(envp);
+	g_global.g_state_old = 0;
 	g_global.g_state = 0;
 	ft_getpid(&prompt);
 	prompt = init_var(prompt, s, argv);
@@ -76,8 +77,10 @@ int	main(int ac, char **av, char **envp)
 
 	gc_init(&g_global.gc);
 	prompt = init_prompt(av, envp);
-	while (av && ac)
+	(void)ac;
+	while (666)
 	{
+		g_global.g_state_old = g_global.g_state;
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		out = readline("guest@minishell $ ");
@@ -87,5 +90,5 @@ int	main(int ac, char **av, char **envp)
 		g_global.g_state = WEXITSTATUS(g_global.g_state);
 	}
 	gc_clean(&g_global.gc);
-	exit(g_global.g_state);
+	exit(WEXITSTATUS(g_global.g_state));
 }

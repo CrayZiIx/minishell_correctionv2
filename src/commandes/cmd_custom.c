@@ -6,13 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 01:15:03 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:24:27 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:21:50 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-extern t_glob g_global;
+extern t_glob	g_global;
 
 static void	update_output(char ***matrix, int fd)
 {
@@ -30,7 +30,6 @@ static void	update_output(char ***matrix, int fd)
 		temp = ft_strtrim(line, "\n", &g_global.gc);
 		free(line);
 		aux = ft_extend_matrix(aux, temp);
-		// free(temp);
 	}
 	ft_free_matrix(matrix);
 	*matrix = aux;

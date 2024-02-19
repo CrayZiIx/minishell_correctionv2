@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 23:56:11 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 13:15:53 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:06:59 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_countchar(char *s, char c)
 	}
 	return (count);
 }
+
 int	ft_strchr_i(const char *s, int c)
 {
 	unsigned char	c_unsigned;
@@ -62,6 +63,7 @@ int	ft_strchars_i(const char *s, char *set)
 	}
 	return (-1);
 }
+
 void	*my_ptr(void *init_ptr)
 {
 	static void	*ptr;
@@ -69,4 +71,16 @@ void	*my_ptr(void *init_ptr)
 	if (init_ptr)
 		ptr = init_ptr;
 	return (ptr);
+}
+
+void	print_error_heredoc(char c, int *i)
+{
+	if (c == '<')
+		ft_putendl_fd(TOKEN_EP_L, 2);
+	else if (c == '>')
+		ft_putendl_fd(TOKEN_EP_R, 2);
+	else
+		ft_putendl_fd(TOKEN_ERR_NL, 2);
+	g_global.g_state = 2;
+	(*i) = -2;
 }

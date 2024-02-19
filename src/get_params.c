@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:42:09 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:58:37 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,9 @@
 
 extern t_glob	g_global;
 
-void	print_error_heredoc(char c, int *i)
-{
-	if (c == '<')
-		ft_putendl_fd("minishell: syntax error near unexpected token '<' or '<<'", 2);
-	else if (c == '>')
-		ft_putendl_fd("minishell: syntax error near unexpected token '>' or '>>'", 2);
-	else
-		ft_putendl_fd("minishell: syntax error near unexpected token 'newline", 2);
-	g_global.g_state = 2;
-	(*i) = -2;
-}
 int	get_fd(int oldfd, char *path, int flags[2])
 {
-	int fd;
+	int	fd;
 
 	if (oldfd > 2)
 		close(oldfd);
@@ -38,9 +27,9 @@ int	get_fd(int oldfd, char *path, int flags[2])
 	else if (!flags[0] && access(path, R_OK) == -1)
 		ft_perror(NO_PERM, path, 126);
 	if (flags[0] && flags[1])
-		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666 );
+		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
 	else if (flags[0] && !flags[1])
-		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0666 );
+		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	else if (!flags[0] && oldfd != -1)
 		fd = open(path, O_RDONLY);
 	else
@@ -68,7 +57,7 @@ t_input	*get_pipeout1(t_input *node, char **args, int *i)
 	return (node);
 }
 
-t_input *get_pipeout2(t_input *node, char **args, int *i)
+t_input	*get_pipeout2(t_input *node, char **args, int *i)
 {
 	int	flags[2];
 
@@ -95,7 +84,7 @@ t_input *get_pipeout2(t_input *node, char **args, int *i)
 	return (node);
 }
 
-t_input *get_pipein1(t_input *node, char **args, int *i)
+t_input	*get_pipein1(t_input *node, char **args, int *i)
 {
 	int		flags[2];
 
@@ -115,7 +104,7 @@ t_input *get_pipein1(t_input *node, char **args, int *i)
 	return (node);
 }
 
-t_input *get_pipein2(t_input *node, char **args, int *i)
+t_input	*get_pipein2(t_input *node, char **args, int *i)
 {
 	char	*aux[2];
 	char	*str[2];
@@ -141,4 +130,5 @@ t_input *get_pipein2(t_input *node, char **args, int *i)
 		if (node->pipein != -1)
 			print_error_heredoc('0', i);
 	}
-	return (node);}
+	return (node);
+}

@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:29:46 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:24:27 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:20:51 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 extern t_glob	g_global;
 
-
 int	builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 {
-	char **a;
+	char	**a;
 
 	while (cmd)
 	{
@@ -34,23 +33,20 @@ int	builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 		else if (!cmd->next && a && !ft_strncmp(*a, "unset", n) && n == 5)
 			g_global.g_state = ft_unset(prompt);
 		else
-		{
-			//signal(SIGINT, handle_sigint_cmd);
-			//signal(SIGQUIT, SIG_IGN);
 			exec_cmd(prompt, cmd);
-		}
 		cmd = cmd->next;
 	}
 	return (g_global.g_state);
 }
 
-int is_builtins(t_input *node)
+int	is_builtins(t_input *node)
 {
 	int	l;
 
 	if (!node->full_cmd)
 		return (0);
-	if ((node->full_cmd && ft_strchr(*node->full_cmd, '/')) || (node->full_path && \
+	if ((node->full_cmd && ft_strchr(*node->full_cmd, '/')) \
+		|| (node->full_path && \
 		ft_strchr(node->full_path, '/')))
 		return (0);
 	l = ft_strlen(*node->full_cmd);
@@ -68,8 +64,9 @@ int is_builtins(t_input *node)
 		return (1);
 	if (!ft_strncmp(*node->full_cmd, "exit", l) && l == 4)
 		return (1);
-	return (0); 
+	return (0);
 }
+
 int	ft_cd(t_prompt *p)
 {
 	char	**str[2];
@@ -99,7 +96,6 @@ int	ft_pwd(void)
 	char	*buf;
 
 	buf = getcwd(NULL, 4096);
-	printf("buf = [%s]\n", buf);
 	ft_putendl_fd(buf, 1);
 	free(buf);
 	return (0);
@@ -107,10 +103,10 @@ int	ft_pwd(void)
 
 int	ft_echo(t_list *cmd)
 {
-	int	nl;
-	int	i[2];
-	char **argv;
-	t_input *node;
+	int		nl;
+	int		i[2];
+	char	**argv;
+	t_input	*node;
 
 	i[0] = 0;
 	i[1] = 0;

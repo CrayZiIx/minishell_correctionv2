@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 13:15:28 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:27:16 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 
 # define READ_END 0
 # define WRITE_END 1
+# define TOKEN_EP_L "minishell: syntax error near unexpected token '<' or '<<'"
+# define TOKEN_EP_R "minishell: syntax error near unexpected token '>' or '>>'"
+# define TOKEN_ERR_NL "minishell: syntax error near unexpected token 'newline"
 
 /*--------------*/
 /*--STRUCTURES--*/
@@ -40,6 +43,7 @@ typedef struct s_glob
 {
 	t_gcan	gc;
 	int		g_state;
+	int		g_state_old;
 }				t_glob;
 
 typedef struct s_prompt
@@ -136,6 +140,5 @@ void	*check_args(char *out, t_prompt *p);
 
 // char	*ft_getprompt(t_prompt prompt);
 void	*my_ptr(void *init_ptr);
-
 
 #endif

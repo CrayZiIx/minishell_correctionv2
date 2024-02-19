@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:24:27 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:03:27 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-static char **split_all(char **args, t_prompt *prompt)
+static char	**split_all(char **args, t_prompt *prompt)
 {
 	char	**subsplit;
 	int		i;
@@ -47,10 +47,6 @@ static void	*parse_args(char **args, t_prompt *p)
 	g_global.g_state = builtins(p, p->cmds, &is_exit, 0);
 	while (i-- > 0)
 		waitpid(-1, &g_global.g_state, 0);
-	if (!is_exit && g_global.g_state == 13)
-		g_global.g_state = 0;
-	if (g_global.g_state > 255)
-		g_global.g_state = g_global.g_state / 255;
 	if (args && is_exit)
 	{
 		ft_lstclear(&p->cmds, free_content);

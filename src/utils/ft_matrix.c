@@ -6,13 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 16:08:20 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:38:14 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:54:21 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-extern t_glob g_global;
+extern t_glob	g_global;
 
 void	ft_free_matrix(char ***m)
 {
@@ -74,7 +74,8 @@ char	**ft_matrix_replace_in(char ***big, char **small, int n)
 	i[2] = -1;
 	if (!big || !*big || n < 0 || n >= ft_matrixlen(*big))
 		return (NULL);
-	aux = ft_calloc(ft_matrixlen(*big) + ft_matrixlen(small), sizeof(char *), &g_global.gc);
+	aux = ft_calloc(ft_matrixlen(*big)
+			+ ft_matrixlen(small), sizeof(char *), &g_global.gc);
 	while (aux && big[0][++i[0]])
 	{
 		if (i[0] != n)

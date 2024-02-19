@@ -6,13 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:25:17 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:24:27 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:23:17 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-extern t_glob g_global;
+extern t_glob	g_global;
 
 static int	ft_count_words(char *s, char *set, int count)
 {
