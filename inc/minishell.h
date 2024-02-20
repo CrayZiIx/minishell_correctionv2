@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:22:59 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:27:03 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ char	*ft_strtrim_all(char const *s1, int squote, int dquote);
 /*--[heredoc.c]*/
 int		get_here_doc(char *s[2], char *aux[2]);
 /*--[env.c]--*/
-char	*ft_getenv(char *var, char **envp, int n);
-char	**ft_setenv(char *var, char *value, char **envp, int n);
-int		ft_export(t_prompt *prompt);
-int		ft_unset(t_prompt *prompt);
+char	*ft_getenv(char *var, char **envp, int n, t_glob g_global);
+char	**ft_setenv(char *var, char *value, char **envp, t_glob g_global);
+int		ft_export(t_prompt *prompt, t_glob g_global);
+int		ft_unset(t_prompt *prompt, t_glob g_global);
 /*--[get_params.c ]--*/
 int		get_fd(int oldfd, char *path, int flags[2]);
 t_input	*get_pipeout1(t_input *node, char **args, int *i);
@@ -131,7 +131,7 @@ t_input	*get_pipein2(t_input *node, char **args, int *i);
 void	*exec_cmd(t_prompt *prompt, t_list *cmd,t_glob g_global);
 /*--[expend.c]--*/
 char	*expand_path(char *s, int i, int quotes[2], char *var);
-char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt);
+char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt, t_glob g_global);
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdsubsplit(char const *s, char *set);
 /*--[ft_cmdsubsplit.c ]--*/
@@ -139,4 +139,6 @@ char	**ft_cmdtrim(char const *s, char *set,t_glob g_global);
 /*--[fill_nodes.c]--*/
 t_list	*fill_nodes(char **args, int i);
 /*--[parse_args.c]--*/
-void	*check_args(char *out, t_prompt *p);
+void	*check_args(char *out, t_prompt *p, t_glob g_global);
+
+#endif
