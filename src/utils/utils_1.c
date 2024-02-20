@@ -75,7 +75,7 @@ void	*my_ptr(void *init_ptr)
 	return (ptr);
 }
 
-void	print_error_heredoc(char c, int *i,t_glob *g_global)
+void	print_error_heredoc(char c, int *i, t_glob *g_global)
 {
 	if (c == '<')
 		ft_putendl_fd(TOKEN_EP_L, 2);

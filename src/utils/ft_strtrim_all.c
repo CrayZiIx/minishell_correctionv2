@@ -38,7 +38,8 @@ static int	malloc_len(char const *s1)
 	return (count);
 }
 
-char	*ft_strtrim_all(char const *s1, int squote, int dquote,t_glob *g_global)
+char	*ft_strtrim_all(char const *s1, int squote, int dquote,
+	t_glob *g_global)
 {
 	int		count;
 	int		i[2];

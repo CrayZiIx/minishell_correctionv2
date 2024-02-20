@@ -64,7 +64,8 @@ int	ft_matrixlen(char **m)
 	return (i);
 }
 
-char	**ft_matrix_replace_in(char ***big, char **small, int n, t_glob *g_global)
+char	**ft_matrix_replace_in(char ***big, char **small, int n,
+	t_glob *g_global)
 {
 	char	**aux;
 	int		i[3];
