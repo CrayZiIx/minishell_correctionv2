@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 21:04:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:27:06 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:43:47 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-void	*ft_perror(int err_type, char *param, int err)
+void	*ft_perror(int err_type, char *param, int err, t_glob g_global)
 {
 	g_global.g_state = err;
 	if (err_type == QUOTE)
@@ -97,7 +97,7 @@ int	ft_exit(t_list *cmd, int *is_exit)
 	return (status[0]);
 }
 
-void	cd_error(char **s[2])
+void	cd_error(char **s[2], t_glob g_global)
 {
 	DIR	*dir;
 
@@ -114,9 +114,9 @@ void	cd_error(char **s[2])
 	if (s[0][1] && dir && access(s[0][1], F_OK) != -1)
 		chdir(s[0][1]);
 	else if (s[0][1] && access(s[0][1], F_OK) == -1)
-		ft_perror(NOT_DIR, s[0][1], 1);
+		ft_perror(NOT_DIR, s[0][1], 1, g_global);
 	else if (s[0][1])
-		ft_perror(NOT_DIR, s[0][1], 1);
+		ft_perror(NOT_DIR, s[0][1], 1, g_global);
 	if (s[0][1] && dir)
 		closedir(dir);
 }

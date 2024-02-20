@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:02:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:14:52 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:42:35 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**ft_setenv(char *var, char *value, char **envp, t_glob g_global)
 			return (envp);
 		}
 	}
-	envp = ft_extend_matrix(envp, aux[1]);
+	envp = ft_extend_matrix(envp, aux[1], g_global);
 	return (envp);
 }
 
@@ -97,7 +97,7 @@ int	ft_export(t_prompt *prompt, t_glob g_global)
 			if (pos == 1)
 				prompt->envp[ij[1]] = ft_strdup(argv[ij[0]], &g_global.gc);
 			else if (!pos)
-				prompt->envp = ft_extend_matrix(prompt->envp, argv[ij[0]]);
+				prompt->envp = ft_extend_matrix(prompt->envp, argv[ij[0]], g_global);
 			ij[0]++;
 		}
 	}
@@ -127,7 +127,7 @@ int	ft_unset(t_prompt *prompt, t_glob g_global)
 				argv[ij[0]] = aux;
 			}
 			if (var_in_envp(argv[ij[0]], prompt->envp, ij))
-				ft_matrix_replace_in(&prompt->envp, NULL, ij[1]);
+				ft_matrix_replace_in(&prompt->envp, NULL, ij[1], g_global);
 		}
 	}
 	return (0);
