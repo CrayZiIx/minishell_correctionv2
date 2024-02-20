@@ -6,13 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:24:30 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:30:40 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:33:52 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
 static char	*find_command(char **env_path, char *cmd, char *full_path, t_glob *g_global)
 {
