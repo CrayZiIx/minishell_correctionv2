@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:12:55 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:39:09 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ static t_prompt	init_var(t_prompt prompt, char *s, char **argv, t_glob g_global)
 	char	*num;
 
 	s = getcwd(NULL, 0);
-	prompt.envp = ft_setenv("PWD", s, prompt.envp, 3);
+	prompt.envp = ft_setenv("PWD", s, prompt.envp, g_global);
 	free(s);
-	s = ft_getenv("SHLVL", prompt.envp, 5);
+	s = ft_getenv("SHLVL", prompt.envp, 5, g_global);
 	if (!s || ft_atoi(s) <= 0)
 		num = ft_strdup("1", &g_global.gc);
 	else
 		num = ft_itoa(ft_atoi(s) + 1, &g_global.gc);
-	prompt.envp = ft_setenv("SHLVL", num, prompt.envp, 5);
-	s = ft_getenv("PATH", prompt.envp, 4);
-	s = ft_getenv("_", prompt.envp, 1);
+	prompt.envp = ft_setenv("SHLVL", num, prompt.envp, g_global);
+	s = ft_getenv("PATH", prompt.envp, 1, g_global);
+	s = ft_getenv("_", prompt.envp, 1, g_global);
 	if (!s)
-		prompt.envp = ft_setenv("_", argv[0], prompt.envp, 1);
+		prompt.envp = ft_setenv("_", argv[0], prompt.envp, g_global);
 	return (prompt);
 }
 
@@ -62,7 +62,7 @@ static t_prompt	init_prompt(char **argv, char **envp, t_glob g_global)
 
 	s = NULL;
 	prompt.cmds = NULL;
-	prompt.envp = ft_dup_matrix(envp);
+	prompt.envp = ft_dup_matrix(envp, g_global);
 	g_global.g_state_old = 0;
 	g_global.g_state = 0;
 	ft_getpid(&prompt, g_global);
@@ -86,7 +86,7 @@ int	main(int ac, char **av, char **envp)
 		signal(SIGQUIT, SIG_IGN);
 		out = readline("guest@minishell $ ");
 		signal(SIGINT, handle_sigint_cmd);
-		if (!check_args(out, &prompt))
+		if (!check_args(out, &prompt, g_global))
 			break ;
 		if (g_global.sig_int)
 			g_global.g_state = 130;
