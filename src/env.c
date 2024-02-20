@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:02:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:42:35 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:24:24 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-char	*ft_getenv(char *var, char **envp, int n, t_glob g_global)
+char	*ft_getenv(char *var, char **envp, int n, t_glob *g_global)
 {
 	char	*s;
 	int		i;
@@ -30,7 +30,7 @@ char	*ft_getenv(char *var, char **envp, int n, t_glob g_global)
 			n2 = ft_strchr_i(envp[i], '=');
 		if (!ft_strncmp(envp[i], var, n2))
 		{
-			s = ft_substr(envp[i], n2 + 1, ft_strlen(envp[i]), &g_global.gc);
+			s = ft_substr(envp[i], n2 + 1, ft_strlen(envp[i]), &g_global->gc);
 			return (s);
 		}
 		i++;
@@ -38,7 +38,7 @@ char	*ft_getenv(char *var, char **envp, int n, t_glob g_global)
 	return (NULL);
 }
 
-char	**ft_setenv(char *var, char *value, char **envp, t_glob g_global)
+char	**ft_setenv(char *var, char *value, char **envp, t_glob *g_global)
 {
 	int		i[2];
 	char	*aux[2];
@@ -46,8 +46,8 @@ char	**ft_setenv(char *var, char *value, char **envp, t_glob g_global)
 
 	n = ft_strlen(var);
 	i[0] = -1;
-	aux[0] = ft_strjoin(var, "=", &g_global.gc);
-	aux[1] = ft_strjoin(aux[0], value, &g_global.gc);
+	aux[0] = ft_strjoin(var, "=", &g_global->gc);
+	aux[1] = ft_strjoin(aux[0], value, &g_global->gc);
 	while (!ft_strchr(var, '=') && envp && envp[++i[0]])
 	{
 		i[1] = n;
@@ -60,7 +60,7 @@ char	**ft_setenv(char *var, char *value, char **envp, t_glob g_global)
 			return (envp);
 		}
 	}
-	envp = ft_extend_matrix(envp, aux[1], g_global);
+	envp = ft_extend_matrix(envp, aux[1], &g_global);
 	return (envp);
 }
 
@@ -81,7 +81,7 @@ static int	var_in_envp(char *argv, char **envp, int ij[2])
 	return (0);
 }
 
-int	ft_export(t_prompt *prompt, t_glob g_global)
+int	ft_export(t_prompt *prompt, t_glob *g_global)
 {
 	int		ij[2];
 	int		pos;
@@ -95,7 +95,7 @@ int	ft_export(t_prompt *prompt, t_glob g_global)
 		{
 			pos = var_in_envp(argv[ij[0]], prompt->envp, ij);
 			if (pos == 1)
-				prompt->envp[ij[1]] = ft_strdup(argv[ij[0]], &g_global.gc);
+				prompt->envp[ij[1]] = ft_strdup(argv[ij[0]], g_global->gc);
 			else if (!pos)
 				prompt->envp = ft_extend_matrix(prompt->envp, argv[ij[0]], g_global);
 			ij[0]++;
@@ -104,12 +104,12 @@ int	ft_export(t_prompt *prompt, t_glob g_global)
 	else
 	{
 		ft_putmatrix_fd(prompt->envp, 1, 1);
-		g_global.g_state = 0;
+		g_global->g_state = 0;
 	}
 	return (0);
 }
 
-int	ft_unset(t_prompt *prompt, t_glob g_global)
+int	ft_unset(t_prompt *prompt, t_glob *g_global)
 {
 	char	**argv;
 	char	*aux;
@@ -123,7 +123,7 @@ int	ft_unset(t_prompt *prompt, t_glob g_global)
 		{
 			if (argv[ij[0]][ft_strlen(argv[ij[0]]) - 1] != '=')
 			{
-				aux = ft_strjoin(argv[ij[0]], "=", &g_global.gc);
+				aux = ft_strjoin(argv[ij[0]], "=", g_global->gc);
 				argv[ij[0]] = aux;
 			}
 			if (var_in_envp(argv[ij[0]], prompt->envp, ij))

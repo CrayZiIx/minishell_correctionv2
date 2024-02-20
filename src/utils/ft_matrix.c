@@ -6,13 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 16:08:20 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 18:54:21 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:23:56 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
 void	ft_free_matrix(char ***m)
 {
@@ -36,20 +36,20 @@ char	**ft_extend_matrix(char **in, char *newstr, t_glob g_global)
 	if (!newstr)
 		return (in);
 	len = ft_matrixlen(in);
-	out = gc_malloc(&g_global.gc, sizeof(char *) * (len + 2));
+	out = gc_malloc(&g_global->gc, sizeof(char *) * (len + 2));
 	out[len + 1] = NULL;
 	if (!out)
 		return (in);
 	while (++i < len)
 	{
-		out[i] = ft_strdup(in[i], &g_global.gc);
+		out[i] = ft_strdup(in[i], &g_global->gc);
 		if (!out[i])
 		{
 			ft_free_matrix(&in);
 			ft_free_matrix(&out);
 		}
 	}
-	out[i] = ft_strdup(newstr, &g_global.gc);
+	out[i] = ft_strdup(newstr, &g_global->gc);
 	ft_free_matrix(&in);
 	return (out);
 }
@@ -64,7 +64,7 @@ int	ft_matrixlen(char **m)
 	return (i);
 }
 
-char	**ft_matrix_replace_in(char ***big, char **small, int n,t_glob g_global)
+char	**ft_matrix_replace_in(char ***big, char **small, int n, t_glob *g_global)
 {
 	char	**aux;
 	int		i[3];
@@ -75,15 +75,15 @@ char	**ft_matrix_replace_in(char ***big, char **small, int n,t_glob g_global)
 	if (!big || !*big || n < 0 || n >= ft_matrixlen(*big))
 		return (NULL);
 	aux = ft_calloc(ft_matrixlen(*big)
-			+ ft_matrixlen(small), sizeof(char *), &g_global.gc);
+			+ ft_matrixlen(small), sizeof(char *), &g_global->gc);
 	while (aux && big[0][++i[0]])
 	{
 		if (i[0] != n)
-			aux[++i[2]] = ft_strdup(big[0][i[0]], &g_global.gc);
+			aux[++i[2]] = ft_strdup(big[0][i[0]], &g_global->gc);
 		else
 		{
 			while (small && small[++i[1]])
-				aux[++i[2]] = ft_strdup(small[i[1]], &g_global.gc);
+				aux[++i[2]] = ft_strdup(small[i[1]], &g_global->gc);
 		}
 	}
 	ft_free_matrix(big);

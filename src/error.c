@@ -6,13 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 21:04:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:43:47 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:14:42 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
 void	*ft_perror(int err_type, char *param, int err, t_glob g_global)
 {

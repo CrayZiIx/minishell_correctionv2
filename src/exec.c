@@ -6,13 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 02:27:04 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:56:59 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:14:39 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
 static void	child_builtin(t_prompt *prompt, t_input *node, int l, t_list *cmd, t_glob g_global)
 {
