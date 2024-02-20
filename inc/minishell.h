@@ -128,7 +128,7 @@ t_input	*get_pipeout2(t_input *node, char **args, int *i, t_glob *g_global);
 t_input	*get_pipein1(t_input *node, char **args, int *i, t_glob *g_global);
 t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global);
 /*--[get_cmd.c]--*/
-void	*exec_cmd(t_prompt *prompt, t_list *cmd,t_glob g_global);
+void	*exec_cmd(t_prompt *prompt, t_list *cmd,t_glob *g_global);
 /*--[expend.c]--*/
 char	*expand_path(char *s, int i, int quotes[2], char *var, t_glob *g_global);
 char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt, t_glob *g_global);

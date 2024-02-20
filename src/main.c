@@ -22,7 +22,7 @@ static void	ft_getpid(t_prompt *prompt, t_glob *g_global)
 	pid = fork();
 	if (pid < 0)
 	{
-		ft_perror(FORK_ERR, NULL, 1);
+		ft_perror(FORK_ERR, NULL, 1,g_global);
 		ft_free_matrix(&prompt->envp);
 		exit(1);
 	}
