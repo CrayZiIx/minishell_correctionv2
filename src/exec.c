@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 02:27:04 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 22:10:30 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:56:59 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-void	child_builtin(t_prompt *prompt, t_input *node, int l, t_list *cmd)
+static void	child_builtin(t_prompt *prompt, t_input *node, int l, t_list *cmd, t_glob g_global)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
@@ -37,7 +37,7 @@ void	child_builtin(t_prompt *prompt, t_input *node, int l, t_list *cmd)
 	}
 }
 
-static void	*child_redir(t_list *cmd, int fd[2])
+static void	*child_redir(t_list *cmd, int fd[2], t_glob g_global)
 {
 	t_input	*node;
 
@@ -45,22 +45,22 @@ static void	*child_redir(t_list *cmd, int fd[2])
 	if (node->pipein != STDIN_FILENO)
 	{
 		if (dup2(node->pipein, STDIN_FILENO) == -1)
-			return (ft_perror(DUP_ERR, NULL, 1));
+			return (ft_perror(DUP_ERR, NULL, 1, g_global));
 		close(node->pipein);
 	}
 	if (node->pipeout != STDOUT_FILENO)
 	{
 		if (dup2(node->pipeout, STDOUT_FILENO) == -1)
-			return (ft_perror(DUP_ERR, NULL, 1));
+			return (ft_perror(DUP_ERR, NULL, 1, g_global));
 		close(node->pipeout);
 	}
 	else if (cmd->next && dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
-		return (ft_perror(DUP_ERR, NULL, 1));
+		return (ft_perror(DUP_ERR, NULL, 1, g_global));
 	close(fd[WRITE_END]);
 	return ("");
 }
 
-void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2])
+static void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global)
 {
 	t_input	*node;
 	int		l;
@@ -69,9 +69,9 @@ void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2])
 	l = 0;
 	if (node->full_cmd)
 		l = ft_strlen(*node->full_cmd);
-	child_redir(cmd, fd);
+	child_redir(cmd, fd, g_global);
 	close(fd[READ_END]);
-	child_builtin(prompt, node, l, cmd);
+	child_builtin(prompt, node, l, cmd, g_global);
 	wait(&g_global.g_state);
 	g_global.g_state = WEXITSTATUS(g_global.g_state);
 	ft_lstclear(&prompt->cmds, free_content);
@@ -79,7 +79,7 @@ void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2])
 	exit(g_global.g_state);
 }
 
-void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2])
+static void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global)
 {
 	pid_t	pid;
 
@@ -88,17 +88,15 @@ void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2])
 	{
 		close(fd[READ_END]);
 		close(fd[WRITE_END]);
-		ft_perror(FORK_ERR, NULL, 1);
+		ft_perror(FORK_ERR, NULL, 1, g_global);
 	}
 	else if (!pid)
-		child_process(prompt, cmd, fd);
+		child_process(prompt, cmd, fd, g_global);
 	else
-	{
 		wait(&g_global.g_state);
-	}
 }
 
-void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2])
+void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global)
 {
 	t_input	*node;
 	DIR		*dir;
@@ -111,7 +109,7 @@ void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2])
 		return (NULL);
 	if ((node->full_path && access(node->full_path, X_OK) == 0) \
 		|| is_builtins(node))
-		exec_fork(prompt, cmd, fd);
+		exec_fork(prompt, cmd, fd, g_global);
 	else if (!is_builtins(node) && ((node->full_path && \
 		!access(node->full_path, F_OK)) || dir))
 		g_global.g_state = 126;

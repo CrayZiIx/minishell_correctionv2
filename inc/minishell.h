@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:48:38 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:56:41 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef enum e_rl_error
 /*FUNCTIONS*/
 /*---------*/
 /*--[exec.c]--*/
-void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2]);
+void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global);
 /*--[signal.c]--*/
 void	handle_sigint_cmd(int sig);
 void	handle_sigint(int sig);
