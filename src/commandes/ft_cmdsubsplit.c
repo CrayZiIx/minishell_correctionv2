@@ -6,13 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:25:17 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 19:23:17 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:30:12 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
 static int	ft_count_words(char *s, char *set, int count)
 {
@@ -42,7 +42,7 @@ static int	ft_count_words(char *s, char *set, int count)
 	return (count);
 }
 
-static char	**ft_fill_array(char **aux, char *s, char *set, int i[3],t_glob g_global)
+static char	**ft_fill_array(char **aux, char *s, char *set, int i[3],t_glob *g_global)
 {
 	int		q[2];
 
@@ -62,12 +62,12 @@ static char	**ft_fill_array(char **aux, char *s, char *set, int i[3],t_glob g_gl
 		}
 		else
 			i[0]++;
-		aux[i[2]++] = ft_substr(s, i[1], i[0] - i[1], &g_global.gc);
+		aux[i[2]++] = ft_substr(s, i[1], i[0] - i[1], &g_global->gc);
 	}
 	return (aux);
 }
 
-char	**ft_cmdsubsplit(char const *s, char *set)
+char	**ft_cmdsubsplit(char const *s, char *set, t_glob *g_global)
 {
 	char	**aux;
 	int		nwords;
@@ -81,7 +81,7 @@ char	**ft_cmdsubsplit(char const *s, char *set)
 	nwords = ft_count_words((char *)s, set, 0);
 	if (nwords == -1)
 		return (NULL);
-	aux = gc_malloc(&g_global.gc, (nwords + 1) * sizeof(char *));
+	aux = gc_malloc(&g_global->gc, (nwords + 1) * sizeof(char *));
 	if (aux == NULL)
 		return (NULL);
 	aux = ft_fill_array(aux, (char *)s, set, i,g_global);

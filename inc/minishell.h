@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 21:23:00 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:30:49 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	*exec_cmd(t_prompt *prompt, t_list *cmd,t_glob *g_global);
 char	*expand_path(char *s, int i, int quotes[2], char *var, t_glob *g_global);
 char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt, t_glob *g_global);
 /*--[ft_cmdsubsplit.c ]--*/
-char	**ft_cmdsubsplit(char const *s, char *set);
+char	**ft_cmdsubsplit(char const *s, char *set, t_glob *g_global);
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdtrim(char const *s, char *set,t_glob *g_global);
 
