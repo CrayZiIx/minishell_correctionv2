@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:29:43 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 23:07:05 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:17:53 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 
 extern t_glob	g_global;
 
-void sig(int sig)
+void	sig(int sig)
 {
 	if (sig == SIGINT)
 		g_global.sig_int = 1;
 }
 
+void	setup_sigaction(int sig, int flags, void (*h)(int))
+{
+	struct sigaction	action;
+
+	action.sa_handler = h;
+	action.sa_flags = flags;
+	sigemptyset(&(action.sa_mask));
+	sigaction(sig, &action, 0);
+}
+
 char	*get_here_str(char *s[2], size_t len, char *limit, char *warn)
 {
 	char				*temp;
-	struct sigaction	action;
-	
-	g_global.sig_int = 0;
-	// signal(SIGINT, handle_sigint_cmd);
-	action.sa_handler = sig;
-	sigemptyset(&action.sa_mask);
-	sigaction(SIGINT, &action, NULL);
-	action.sa_flags = 0;
+
 	while (g_global.g_state != 130 && (!s[0] || ft_strncmp(s[0], limit, len) \
 		|| ft_strlen(limit) != len))
 	{
@@ -57,6 +60,7 @@ int	get_here_doc(char *s[2], char *aux[2])
 {
 	int		fd[2];
 
+	setup_sigaction(SIGINT, 0, sig);
 	g_global.g_state = 0;
 	if (pipe(fd) == -1)
 	{
@@ -65,9 +69,7 @@ int	get_here_doc(char *s[2], char *aux[2])
 	}
 	s[1] = get_here_str(s, 0, aux[0], aux[1]);
 	if (s[1] == NULL)
-	{
-		printf("tesfd\n");
-	}
+		ft_putchar_fd('\n', 2);
 	write(fd[WRITE_END], s[1], ft_strlen(s[1]));
 	close(fd[WRITE_END]);
 	if (g_global.g_state == 130)
@@ -75,5 +77,6 @@ int	get_here_doc(char *s[2], char *aux[2])
 		close(fd[READ_END]);
 		return (-1);
 	}
+	setup_sigaction(SIGINT, SA_RESTART, handle_sigint_cmd);
 	return (fd[READ_END]);
 }

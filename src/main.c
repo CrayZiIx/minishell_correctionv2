@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 21:10:17 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:18:03 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,16 @@ int	main(int ac, char **av, char **envp)
 	while (666)
 	{
 		g_global.g_state_old = g_global.g_state;
+		g_global.sig_int = 0;
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		out = readline("guest@minishell $ ");
 		signal(SIGINT, handle_sigint_cmd);
 		if (!check_args(out, &prompt))
 			break ;
-		if (WIFEXITED(g_global.g_state))
+		if (g_global.sig_int)
+			g_global.g_state = 130;
+		else if (WIFEXITED(g_global.g_state))
 			g_global.g_state = WEXITSTATUS(g_global.g_state);
 		free(out);
 	}
