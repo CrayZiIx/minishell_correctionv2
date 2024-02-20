@@ -90,7 +90,7 @@ void	*exec_cmd(t_prompt *prompt, t_list *cmd,t_glob g_global)
 	get_cmd(prompt, cmd, NULL, NULL, g_global);
 	if (pipe(fd) == -1)
 		return (ft_perror(PIPE_ERR, NULL, 1,g_global));
-	if (!check_to_fork(prompt, cmd, fd))
+	if (!check_to_fork(prompt, cmd, fd,g_global))
 		return (NULL);
 	close(fd[WRITE_END]);
 	if (cmd->next && !((t_input *)cmd->next->content)->pipein)
