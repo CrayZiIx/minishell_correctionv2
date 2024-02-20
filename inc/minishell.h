@@ -109,7 +109,7 @@ int		is_builtins(t_input *node);
 int		ft_pwd(void);
 int		ft_echo(t_list *cmd);
 int		ft_cd(t_prompt *p, t_glob *g_global);
-/*--[utils_1.c]--*/
+/*--[utils_1.c]--*/child_builtin
 int		ft_countchar(char *s, char c);
 int		ft_strchr_i(const char *s, int c);
 int		ft_strchars_i(const char *s, char *set);
