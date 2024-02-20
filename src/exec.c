@@ -14,26 +14,24 @@
 
 // extern t_glob	g_global;
 
-static void	child_builtin(t_prompt *prompt, t_input *node, int l, t_list *cmd, t_glob g_global)
+static void	child_builtin(t_pt *pt, t_input *node, int l, t_list *cmd)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	if (!is_builtins(node) && node->full_cmd)
-	{
-		execve(node->full_path, node->full_cmd, prompt->envp);
-	}
+		execve(node->full_path, node->full_cmd, pt->prompt->envp);
 	else if (is_builtins(node) && node->full_cmd \
 		&& !ft_strncmp(*node->full_cmd, "pwd", l) \
 		&& l == 3)
-		g_global.g_state = ft_pwd();
+		pt->g_global->g_state = ft_pwd();
 	else if (is_builtins(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "echo", l) && l == 4)
-		g_global.g_state = ft_echo(cmd);
+		pt->g_global->g_state = ft_echo(cmd);
 	else if (is_builtins(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "env", l) && l == 3)
 	{
-		ft_putmatrix_fd(prompt->envp, 1, 1);
-		g_global.g_state = 0;
+		ft_putmatrix_fd(pt->prompt->envp, 1, 1);
+		pt->g_global->g_state = 0;
 	}
 }
 
@@ -60,26 +58,31 @@ static void	*child_redir(t_list *cmd, int fd[2], t_glob *g_global)
 	return ("");
 }
 
-static void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	*g_global)
+static void	*child_process(t_prompt *prompt, t_list *cmd,
+	int fd[2], t_glob	*g_global)
 {
 	t_input	*node;
 	int		l;
+	t_pt	pt;
 
+	pt.prompt = prompt;
+	pt.g_global = g_global;
 	node = cmd->content;
 	l = 0;
 	if (node->full_cmd)
 		l = ft_strlen(*node->full_cmd);
 	child_redir(cmd, fd, g_global);
 	close(fd[READ_END]);
-	child_builtin(prompt, node, l, cmd, *g_global);
+	child_builtin(&pt, node, l, cmd);
 	wait(&g_global->g_state);
-	g_global->g_state = WEXITSTATUS(g_global->g_state);
-	ft_lstclear(&prompt->cmds, free_content);
+	g_global->g_state = WEXITSTATUS(pt.g_global->g_state);
+	ft_lstclear(&pt.prompt->cmds, free_content);
 	gc_clean(&g_global->gc);
 	exit(g_global->g_state);
 }
 
-static void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	*g_global)
+static void	exec_fork(t_prompt *prompt, t_list *cmd,
+	int fd[2], t_glob	*g_global)
 {
 	pid_t	pid;
 
@@ -96,7 +99,8 @@ static void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	*g_global
 		wait(&g_global->g_state);
 }
 
-void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	*g_global)
+void	*check_to_fork(t_prompt *prompt, t_list *cmd,
+	int fd[2], t_glob	*g_global)
 {
 	t_input	*node;
 	DIR		*dir;
