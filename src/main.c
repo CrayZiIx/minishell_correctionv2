@@ -86,7 +86,7 @@ int	main(int ac, char **av, char **envp)
 		signal(SIGQUIT, SIG_IGN);
 		out = readline("guest@minishell $ ");
 		signal(SIGINT, handle_sigint_cmd);
-		if (!check_args(out, &prompt, g_global))
+		if (!check_args(out, &prompt, &g_global))
 			break ;
 		if (g_global.sig_int)
 			g_global.g_state = 130;

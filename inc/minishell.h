@@ -103,7 +103,7 @@ int		ft_countchar(char *s, char c);
 int		ft_strchr_i(const char *s, int c);
 int		ft_strchars_i(const char *s, char *set);
 void	*my_ptr(void *init_ptr);
-void	print_error_heredoc(char c, int *i);
+void	print_error_heredoc(char c, int *i,t_glob *g_global);
 /*--[ft_matrix.c]--*/
 void	ft_free_matrix(char ***m);
 char	**ft_extend_matrix(char **in, char *newstr, t_glob *g_global);
@@ -113,7 +113,7 @@ int		ft_putmatrix_fd(char **m, int nl, int fd);
 /*--[ft_matrix_2.c]--*/
 char	**ft_dup_matrix(char **m,t_glob *g_global);
 /*--[ft_strtrim_all.c ]--*/
-char	*ft_strtrim_all(char const *s1, int squote, int dquote);
+char	*ft_strtrim_all(char const *s1, int squote, int dquote,t_glob g_global);
 /*--[heredoc.c]*/
 int	get_here_doc(char *s[2], char *aux[2], t_glob *g_global);
 /*--[env.c]--*/

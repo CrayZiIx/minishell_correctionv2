@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
 int	ft_countchar(char *s, char c)
 {
@@ -75,7 +75,7 @@ void	*my_ptr(void *init_ptr)
 	return (ptr);
 }
 
-void	print_error_heredoc(char c, int *i)
+void	print_error_heredoc(char c, int *i,t_glob *g_global)
 {
 	if (c == '<')
 		ft_putendl_fd(TOKEN_EP_L, 2);
@@ -83,6 +83,6 @@ void	print_error_heredoc(char c, int *i)
 		ft_putendl_fd(TOKEN_EP_R, 2);
 	else
 		ft_putendl_fd(TOKEN_ERR_NL, 2);
-	g_global.g_state = 2;
+	g_global->g_state = 2;
 	(*i) = -2;
 }

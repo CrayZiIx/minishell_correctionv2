@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-extern t_glob	g_global;
+//extern t_glob	g_global;
 
 static int	malloc_len(char const *s1)
 {
@@ -38,7 +38,7 @@ static int	malloc_len(char const *s1)
 	return (count);
 }
 
-char	*ft_strtrim_all(char const *s1, int squote, int dquote)
+char	*ft_strtrim_all(char const *s1, int squote, int dquote,t_glob g_global)
 {
 	int		count;
 	int		i[2];
