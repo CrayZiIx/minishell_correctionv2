@@ -6,19 +6,19 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:58:07 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:43:32 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:48:15 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
-static t_input	*ft_init(void)
+static t_input	*ft_init(t_glob *g_global)
 {
 	t_input	*input;
 
-	input = gc_malloc(&g_global.gc, sizeof(t_input));
+	input = gc_malloc(&g_global->gc, sizeof(t_input));
 	if (!input)
 		return (NULL);
 	input->full_cmd = NULL;
@@ -94,7 +94,7 @@ t_list	*fill_nodes(char **args, int i,t_glob *g_global)
 		if (i == 0 || (args[i][0] == '|' && args[i + 1] && args[i + 1][0]))
 		{
 			i += args[i][0] == '|';
-			ft_lstadd_back(&cmds[0], ft_lstnew(ft_init()));
+			ft_lstadd_back(&cmds[0], ft_lstnew(ft_init(g_global)));
 			cmds[1] = ft_lstlast(cmds[0]);
 		}
 		temp[0] = args;
