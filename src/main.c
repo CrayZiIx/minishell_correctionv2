@@ -6,14 +6,14 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 00:16:21 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:19:16 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// extern t_glob	g_global;
 extern int	g_sig_int;
+
 /*DESCRPTION*/
 static void	ft_getpid(t_prompt *prompt, t_glob *g_global)
 {
@@ -22,7 +22,7 @@ static void	ft_getpid(t_prompt *prompt, t_glob *g_global)
 	pid = fork();
 	if (pid < 0)
 	{
-		ft_perror(FORK_ERR, NULL, 1,g_global);
+		ft_perror(FORK_ERR, NULL, 1, g_global);
 		ft_free_matrix(&prompt->envp);
 		exit(1);
 	}
@@ -35,7 +35,8 @@ static void	ft_getpid(t_prompt *prompt, t_glob *g_global)
 	prompt->pid = pid - 1;
 }
 
-static t_prompt	init_var(t_prompt prompt, char *s, char **argv, t_glob *g_global)
+static t_prompt	init_var(t_prompt prompt, char *s,
+	char **argv, t_glob *g_global)
 {
 	char	*num;
 
@@ -74,7 +75,7 @@ int	main(int ac, char **av, char **envp)
 {
 	char		*out;
 	t_prompt	prompt;
-	t_glob g_global;
+	t_glob		g_global;
 
 	gc_init(&g_global.gc);
 	prompt = init_prompt(av, envp, &g_global);
