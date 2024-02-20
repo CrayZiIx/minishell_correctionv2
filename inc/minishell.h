@@ -137,7 +137,7 @@ char	**ft_cmdsubsplit(char const *s, char *set);
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdtrim(char const *s, char *set,t_glob g_global);
 /*--[fill_nodes.c]--*/
-t_list	*fill_nodes(char **args, int i);
+t_list	*fill_nodes(char **args, int i,t_glob g_global);
 /*--[parse_args.c]--*/
 void	*check_args(char *out, t_prompt *p, t_glob g_global);
 

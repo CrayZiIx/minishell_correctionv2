@@ -28,7 +28,7 @@ static t_input	*ft_init(void)
 	return (input);
 }
 
-static t_input	*get_params(t_input *node, char **a[2], int *i)
+static t_input	*get_params(t_input *node, char **a[2], int *i,t_glob g_global)
 {
 	if (a[0][*i])
 	{
@@ -44,7 +44,7 @@ static t_input	*get_params(t_input *node, char **a[2], int *i)
 			a[0][*i + 1][0] == '<')
 			node = get_pipein2(node, a[1], i);
 		else if (a[0][*i][0] != '|')
-			node->full_cmd = ft_extend_matrix(node->full_cmd, a[1][*i]);
+			node->full_cmd = ft_extend_matrix(node->full_cmd, a[1][*i],g_global);
 		else
 		{
 			ft_perror(PIPES_ERR, NULL, 2);
@@ -57,14 +57,14 @@ static t_input	*get_params(t_input *node, char **a[2], int *i)
 	return (node);
 }
 
-static char	**get_trimmed(char **args)
+static char	**get_trimmed(char **args,t_glob g_global)
 {
 	char	**temp;
 	char	*aux;
 	int		j;
 
 	j = -1;
-	temp = ft_dup_matrix(args);
+	temp = ft_dup_matrix(args,g_global);
 	while (temp && temp[++j])
 	{
 		aux = ft_strtrim_all(temp[j], 0, 0);
@@ -73,7 +73,7 @@ static char	**get_trimmed(char **args)
 	return (temp);
 }
 
-static t_list	*stop_fill(t_list *cmds, char **args, char **temp)
+static t_list	*stop_fill(t_list *cmds, char **args, char **temp,t_glob g_global)
 {
 	ft_lstclear(&cmds, free_content);
 	ft_free_matrix(&temp);
@@ -81,13 +81,13 @@ static t_list	*stop_fill(t_list *cmds, char **args, char **temp)
 	return (NULL);
 }
 
-t_list	*fill_nodes(char **args, int i)
+t_list	*fill_nodes(char **args, int i,t_glob g_global)
 {
 	t_list	*cmds[2];
 	char	**temp[2];
 
 	cmds[0] = NULL;
-	temp[1] = get_trimmed(args);
+	temp[1] = get_trimmed(args,g_global);
 	while (args[++i])
 	{
 		cmds[1] = ft_lstlast(cmds[0]);
@@ -98,9 +98,9 @@ t_list	*fill_nodes(char **args, int i)
 			cmds[1] = ft_lstlast(cmds[0]);
 		}
 		temp[0] = args;
-		cmds[1]->content = get_params(cmds[1]->content, temp, &i);
+		cmds[1]->content = get_params(cmds[1]->content, temp, &i,g_global);
 		if (i < 0)
-			return (stop_fill(cmds[0], args, temp[1]));
+			return (stop_fill(cmds[0], args, temp[1],g_global));
 		if (!args[i])
 			break ;
 	}
