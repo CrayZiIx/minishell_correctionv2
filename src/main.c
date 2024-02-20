@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:39:09 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:30:30 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // extern t_glob	g_global;
 
 /*DESCRPTION*/
-static void	ft_getpid(t_prompt *prompt, t_glob g_global)
+static void	ft_getpid(t_prompt *prompt, t_glob *g_global)
 {
 	pid_t	pid;
 
@@ -28,14 +28,14 @@ static void	ft_getpid(t_prompt *prompt, t_glob g_global)
 	}
 	if (!pid)
 	{
-		gc_clean(&g_global.gc);
+		gc_clean(&g_global->gc);
 		exit(1);
 	}
 	waitpid(pid, NULL, 0);
 	prompt->pid = pid - 1;
 }
 
-static t_prompt	init_var(t_prompt prompt, char *s, char **argv, t_glob g_global)
+static t_prompt	init_var(t_prompt prompt, char *s, char **argv, t_glob *g_global)
 {
 	char	*num;
 
@@ -44,9 +44,9 @@ static t_prompt	init_var(t_prompt prompt, char *s, char **argv, t_glob g_global)
 	free(s);
 	s = ft_getenv("SHLVL", prompt.envp, 5, g_global);
 	if (!s || ft_atoi(s) <= 0)
-		num = ft_strdup("1", &g_global.gc);
+		num = ft_strdup("1", &g_global->gc);
 	else
-		num = ft_itoa(ft_atoi(s) + 1, &g_global.gc);
+		num = ft_itoa(ft_atoi(s) + 1, &g_global->gc);
 	prompt.envp = ft_setenv("SHLVL", num, prompt.envp, g_global);
 	s = ft_getenv("PATH", prompt.envp, 1, g_global);
 	s = ft_getenv("_", prompt.envp, 1, g_global);
@@ -55,7 +55,7 @@ static t_prompt	init_var(t_prompt prompt, char *s, char **argv, t_glob g_global)
 	return (prompt);
 }
 
-static t_prompt	init_prompt(char **argv, char **envp, t_glob g_global)
+static t_prompt	init_prompt(char **argv, char **envp, t_glob *g_global)
 {
 	t_prompt	prompt;
 	char		*s;
@@ -76,7 +76,7 @@ int	main(int ac, char **av, char **envp)
 	t_prompt	prompt;
 	t_glob g_global;
 
-	gc_init(&g_global.gc);
+	gc_init(&g_global->gc);
 	prompt = init_prompt(av, envp, g_global);
 	while (ac)
 	{

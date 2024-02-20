@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 16:30:01 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 19:16:36 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:30:54 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-char	**ft_dup_matrix(char **m,t_glob g_global)
+char	**ft_dup_matrix(char **m,t_glob *g_global)
 {
 	char	**out;
 	int		n_rows;
@@ -22,12 +22,12 @@ char	**ft_dup_matrix(char **m,t_glob g_global)
 
 	i = 0;
 	n_rows = ft_matrixlen(m);
-	out = gc_malloc(&g_global.gc, sizeof(char *) * (n_rows + 1));
+	out = gc_malloc(&g_global->gc, sizeof(char *) * (n_rows + 1));
 	if (!out)
 		return (NULL);
 	while (m[i])
 	{
-		out[i] = ft_strdup(m[i], &g_global.gc);
+		out[i] = ft_strdup(m[i], &g_global->gc);
 		if (!out[i])
 		{
 			ft_free_matrix(&out);

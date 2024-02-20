@@ -6,13 +6,13 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:02:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:25:12 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:28:29 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
 char	*ft_getenv(char *var, char **envp, int n, t_glob *g_global)
 {
