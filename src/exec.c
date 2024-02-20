@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 02:27:04 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:14:39 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:44:36 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	*g_g
 	close(fd[READ_END]);
 	child_builtin(prompt, node, l, cmd, *g_global);
 	wait(&g_global->g_state);
-	g_global->g_state = WEXITSTATUS(g_global.g_state);
+	g_global->g_state = WEXITSTATUS(g_global->g_state);
 	ft_lstclear(&prompt->cmds, free_content);
 	gc_clean(&g_global->gc);
 	exit(g_global->g_state);

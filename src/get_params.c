@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:58:18 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:47:47 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_input	*get_pipeout1(t_input *node, char **args, int *i, t_glob *g_global)
 	{
 		*i = -1;
 		if (node->pipeout != -1)
-			print_error_heredoc('0', i);
+			print_error_heredoc('0', i, g_global);
 		else
 			g_global->g_state = 1;
 	}
@@ -66,7 +66,7 @@ t_input	*get_pipeout2(t_input *node, char **args, int *i, t_glob *g_global)
 	(*i)++;
 	if (args[3] && args[3][0] == '<')
 	{
-		print_error_heredoc('<', i);
+		print_error_heredoc('<', i, g_global);
 		return (node);
 	}
 	if (args[++(*i)])
@@ -76,7 +76,7 @@ t_input	*get_pipeout2(t_input *node, char **args, int *i, t_glob *g_global)
 		*i = -1;
 		if (node->pipeout != -1)
 		{
-			print_error_heredoc('0', i);
+			print_error_heredoc('0', i, g_global);
 		}
 		else
 			g_global->g_state = 1;
@@ -97,7 +97,7 @@ t_input	*get_pipein1(t_input *node, char **args, int *i, t_glob *g_global)
 	{
 		*i = -1;
 		if (node->pipein != -1)
-			print_error_heredoc('0', i);
+			print_error_heredoc('0', i, g_global);
 		else
 			g_global->g_state = 1;
 	}
@@ -116,19 +116,19 @@ t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global)
 	(*i)++;
 	if (args[3] && args[3][0] == '>')
 	{
-		print_error_heredoc('>', i);
+		print_error_heredoc('>', i, g_global);
 		return (node);
 	}
 	if (args[++(*i)])
 	{
 		aux[0] = args[*i];
-		node->pipein = get_here_doc(str, aux);
+		node->pipein = get_here_doc(str, aux, g_global);
 	}
 	if (!args[*i] || node->pipein == -1)
 	{
 		*i = -1;
 		if (node->pipein != -1)
-			print_error_heredoc('0', i);
+			print_error_heredoc('0', i, g_global);
 	}
 	return (node);
 }

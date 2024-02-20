@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:02:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:28:29 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:44:08 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_export(t_prompt *prompt, t_glob *g_global)
 		{
 			pos = var_in_envp(argv[ij[0]], prompt->envp, ij);
 			if (pos == 1)
-				prompt->envp[ij[1]] = ft_strdup(argv[ij[0]], g_global->gc);
+				prompt->envp[ij[1]] = ft_strdup(argv[ij[0]], &g_global->gc);
 			else if (!pos)
 				prompt->envp = ft_extend_matrix(prompt->envp, argv[ij[0]], g_global);
 			ij[0]++;
@@ -123,7 +123,7 @@ int	ft_unset(t_prompt *prompt, t_glob *g_global)
 		{
 			if (argv[ij[0]][ft_strlen(argv[ij[0]]) - 1] != '=')
 			{
-				aux = ft_strjoin(argv[ij[0]], "=", g_global->gc);
+				aux = ft_strjoin(argv[ij[0]], "=", &g_global->gc);
 				argv[ij[0]] = aux;
 			}
 			if (var_in_envp(argv[ij[0]], prompt->envp, ij))

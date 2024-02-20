@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 21:24:42 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:48:12 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	**split_all(char **args, t_prompt *prompt, t_glob *g_global)
 		args[i] = expand_vars(args[i], -1, quotes, prompt, g_global);
 		args[i] = expand_path(args[i], -1, quotes, \
 			ft_getenv("HOME", prompt->envp, 4, g_global), g_global);
-		subsplit = ft_cmdsubsplit(args[i], "<|>");
+		subsplit = ft_cmdsubsplit(args[i], "<|>", g_global);
 		ft_matrix_replace_in(&args, subsplit, i, g_global);
 		i += ft_matrixlen(subsplit) - 1;
 		ft_free_matrix(&subsplit);

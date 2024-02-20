@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 05:04:11 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 19:15:48 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:50:21 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	malloc_len(char const *s1)
 	return (count);
 }
 
-char	*ft_strtrim_all(char const *s1, int squote, int dquote,t_glob g_global)
+char	*ft_strtrim_all(char const *s1, int squote, int dquote,t_glob *g_global)
 {
 	int		count;
 	int		i[2];
@@ -49,7 +49,7 @@ char	*ft_strtrim_all(char const *s1, int squote, int dquote,t_glob g_global)
 	count = malloc_len(s1);
 	if (!s1 || count == -1)
 		return (NULL);
-	trimmed = gc_malloc(&g_global.gc, sizeof(char)
+	trimmed = gc_malloc(&g_global->gc, sizeof(char)
 			* (ft_strlen(s1) - count + 1));
 	if (!trimmed)
 		return (NULL);

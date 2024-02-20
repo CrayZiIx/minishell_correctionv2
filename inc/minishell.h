@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 21:30:49 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:45:41 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		ft_putmatrix_fd(char **m, int nl, int fd);
 /*--[ft_matrix_2.c]--*/
 char	**ft_dup_matrix(char **m,t_glob *g_global);
 /*--[ft_strtrim_all.c ]--*/
-char	*ft_strtrim_all(char const *s1, int squote, int dquote,t_glob g_global);
+char	*ft_strtrim_all(char const *s1, int squote, int dquote,t_glob *g_global);
 /*--[heredoc.c]*/
 int	get_here_doc(char *s[2], char *aux[2], t_glob *g_global);
 /*--[env.c]--*/
