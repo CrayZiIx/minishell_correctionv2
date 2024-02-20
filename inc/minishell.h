@@ -44,7 +44,6 @@ typedef struct s_glob
 	t_gcan	gc;
 	int		g_state;
 	int		g_state_old;
-	int		sig_int;
 }				t_glob;
 
 typedef struct s_prompt

@@ -13,7 +13,7 @@
 #include "../inc/minishell.h"
 
 // int		g_global.g_state;
-t_glob	g_global;
+int	sig_int;
 
 void	handle_sigint(int sig)
 {
@@ -31,7 +31,7 @@ void	handle_sigint_cmd(int sig)
 	if (sig == SIGINT)
 	{
 		rl_done = 1;
-		g_global.sig_int = 1;
+		sig_int = 1;
 		ft_putchar_fd('\n', STDIN_FILENO);
 		rl_replace_line("", 0);
 		rl_redisplay();

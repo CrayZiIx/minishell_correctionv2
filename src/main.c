@@ -13,7 +13,7 @@
 #include "../inc/minishell.h"
 
 // extern t_glob	g_global;
-
+extern int	sig_int;
 /*DESCRPTION*/
 static void	ft_getpid(t_prompt *prompt, t_glob *g_global)
 {
@@ -81,14 +81,14 @@ int	main(int ac, char **av, char **envp)
 	while (ac)
 	{
 		g_global.g_state_old = g_global.g_state;
-		g_global.sig_int = 0;
+		sig_int = 0;
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		out = readline("guest@minishell $ ");
 		signal(SIGINT, handle_sigint_cmd);
 		if (!check_args(out, &prompt, &g_global))
 			break ;
-		if (g_global.sig_int)
+		if (sig_int)
 			g_global.g_state = 130;
 		else if (WIFEXITED(g_global.g_state))
 			g_global.g_state = WEXITSTATUS(g_global.g_state);
