@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-static void	update_output(char ***matrix, int fd)
+static void	update_output(char ***matrix, int fd, t_glob g_global)
 {
 	char	**aux;
 	char	*temp;
@@ -35,7 +35,7 @@ static void	update_output(char ***matrix, int fd)
 	*matrix = aux;
 }
 
-void	exec_custom(char ***out, char *full, char *args, char **envp)
+void	exec_custom(char ***out, char *full, char *args, char **envp, t_glob g_global)
 {
 	pid_t	pid;
 	int		fd[2];
@@ -56,6 +56,6 @@ void	exec_custom(char ***out, char *full, char *args, char **envp)
 	}
 	close(fd[WRITE_END]);
 	waitpid(pid, &g_global.g_state, 0);
-	update_output(out, fd[READ_END]);
+	update_output(out, fd[READ_END],g_global);
 	close(fd[READ_END]);
 }

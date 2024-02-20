@@ -12,9 +12,9 @@
 
 #include "../../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
-int	builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
+int	builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n,t_glob g_global)
 {
 	char	**a;
 
@@ -27,7 +27,7 @@ int	builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n)
 		if (a && !ft_strncmp(*a, "exit", n) && n == 4)
 			g_global.g_state = ft_exit(cmd, is_exit);
 		else if (!cmd->next && a && !ft_strncmp(*a, "cd", n) && n == 2)
-			g_global.g_state = ft_cd(prompt);
+			g_global.g_state = ft_cd(prompt,g_global);
 		else if (!cmd->next && a && !ft_strncmp(*a, "export", n) && n == 6)
 			g_global.g_state = ft_export(prompt);
 		else if (!cmd->next && a && !ft_strncmp(*a, "unset", n) && n == 5)
@@ -67,7 +67,7 @@ int	is_builtins(t_input *node)
 	return (0);
 }
 
-int	ft_cd(t_prompt *p)
+int	ft_cd(t_prompt *p,t_glob g_global)
 {
 	char	**str[2];
 	char	*aux;

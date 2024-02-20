@@ -42,7 +42,7 @@ static int	ft_count_words(char *s, char *set, int count)
 	return (count);
 }
 
-static char	**ft_fill_array(char **aux, char *s, char *set, int i[3])
+static char	**ft_fill_array(char **aux, char *s, char *set, int i[3],t_glob g_global)
 {
 	int		q[2];
 
@@ -84,7 +84,7 @@ char	**ft_cmdsubsplit(char const *s, char *set)
 	aux = gc_malloc(&g_global.gc, (nwords + 1) * sizeof(char *));
 	if (aux == NULL)
 		return (NULL);
-	aux = ft_fill_array(aux, (char *)s, set, i);
+	aux = ft_fill_array(aux, (char *)s, set, i,g_global);
 	aux[nwords] = NULL;
 	return (aux);
 }

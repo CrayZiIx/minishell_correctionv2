@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
 static int	ft_count_words(const char *s, char *c, int i[2])
 {
@@ -42,7 +42,7 @@ static int	ft_count_words(const char *s, char *c, int i[2])
 	return (i[1]);
 }
 
-static char	**ft_fill_array(char **aux, char const *s, char *set, int i[3])
+static char	**ft_fill_array(char **aux, char const *s, char *set, int i[3],t_glob g_global)
 {
 	int		s_len;
 	int		q[2];
@@ -69,7 +69,7 @@ static char	**ft_fill_array(char **aux, char const *s, char *set, int i[3])
 	return (aux);
 }
 
-char	**ft_cmdtrim(char const *s, char *set)
+char	**ft_cmdtrim(char const *s, char *set,t_glob g_global)
 {
 	char	**aux;
 	int		nwords;
@@ -89,7 +89,7 @@ char	**ft_cmdtrim(char const *s, char *set)
 	aux = gc_malloc(&g_global.gc, (nwords + 1) * sizeof(char *));
 	if (aux == NULL)
 		return (NULL);
-	aux = ft_fill_array(aux, s, set, i);
+	aux = ft_fill_array(aux, s, set, i,g_global);
 	aux[nwords] = NULL;
 	return (aux);
 }

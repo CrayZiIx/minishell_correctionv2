@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-char	**ft_dup_matrix(char **m)
+char	**ft_dup_matrix(char **m,t_glob g_global)
 {
 	char	**out;
 	int		n_rows;

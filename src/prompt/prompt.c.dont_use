@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-static char	*get_home(t_prompt prompt)
+static char	*get_home(t_prompt prompt,t_glob g_global)
 {
 	char	*temp;
 	char	*pwd;

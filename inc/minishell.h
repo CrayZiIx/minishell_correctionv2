@@ -93,11 +93,11 @@ int		ft_exit(t_list *cmd, int *is_exit);
 void	free_content(void *content);
 void	cd_error(char **s[2]);
 /*--[builtins_1.c]--*/
-int		builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n);
+int		builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n,t_glob g_global);
 int		is_builtins(t_input *node);
 int		ft_pwd(void);
 int		ft_echo(t_list *cmd);
-int		ft_cd(t_prompt *p);
+int		ft_cd(t_prompt *p,t_glob g_global);
 /*--[utils_1.c]--*/
 int		ft_countchar(char *s, char c);
 int		ft_strchr_i(const char *s, int c);
@@ -111,7 +111,7 @@ int		ft_matrixlen(char **m);
 char	**ft_matrix_replace_in(char ***big, char **small, int n);
 int		ft_putmatrix_fd(char **m, int nl, int fd);
 /*--[ft_matrix_2.c]--*/
-char	**ft_dup_matrix(char **m);
+char	**ft_dup_matrix(char **m,t_glob g_global);
 /*--[ft_strtrim_all.c ]--*/
 char	*ft_strtrim_all(char const *s1, int squote, int dquote);
 /*--[heredoc.c]*/
@@ -128,14 +128,14 @@ t_input	*get_pipeout2(t_input *node, char **args, int *i);
 t_input	*get_pipein1(t_input *node, char **args, int *i);
 t_input	*get_pipein2(t_input *node, char **args, int *i);
 /*--[get_cmd.c]--*/
-void	*exec_cmd(t_prompt *prompt, t_list *cmd);
+void	*exec_cmd(t_prompt *prompt, t_list *cmd,t_glob g_global);
 /*--[expend.c]--*/
 char	*expand_path(char *s, int i, int quotes[2], char *var);
 char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt);
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdsubsplit(char const *s, char *set);
 /*--[ft_cmdsubsplit.c ]--*/
-char	**ft_cmdtrim(char const *s, char *set);
+char	**ft_cmdtrim(char const *s, char *set,t_glob g_global);
 /*--[fill_nodes.c]--*/
 t_list	*fill_nodes(char **args, int i);
 /*--[parse_args.c]--*/

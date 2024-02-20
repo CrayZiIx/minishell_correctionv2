@@ -25,7 +25,7 @@ void	ft_free_matrix(char ***m)
 		*m = NULL;
 }
 
-char	**ft_extend_matrix(char **in, char *newstr)
+char	**ft_extend_matrix(char **in, char *newstr, t_glob g_global)
 {
 	char	**out;
 	int		len;
@@ -64,7 +64,7 @@ int	ft_matrixlen(char **m)
 	return (i);
 }
 
-char	**ft_matrix_replace_in(char ***big, char **small, int n)
+char	**ft_matrix_replace_in(char ***big, char **small, int n,t_glob g_global)
 {
 	char	**aux;
 	int		i[3];

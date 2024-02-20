@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-static char	*find_command(char **env_path, char *cmd, char *full_path)
+static char	*find_command(char **env_path, char *cmd, char *full_path, t_glob g_global)
 {
 	char	*temp;
 	int		i;
@@ -37,7 +37,7 @@ static char	*find_command(char **env_path, char *cmd, char *full_path)
 	return (full_path);
 }
 
-static DIR	*cmd_checks(t_prompt *prompt, t_list *cmd, char ***s, char *path)
+static DIR	*cmd_checks(t_prompt *prompt, t_list *cmd, char ***s, char *path,t_glob g_global)
 {
 	t_input	*node;
 	DIR		*dir;
@@ -56,20 +56,20 @@ static DIR	*cmd_checks(t_prompt *prompt, t_list *cmd, char ***s, char *path)
 	{
 		path = ft_getenv("PATH", prompt->envp, 4);
 		*s = ft_split(path, ':', &g_global.gc);
-		node->full_path = find_command(*s, *node->full_cmd, node->full_path);
+		node->full_path = find_command(*s, *node->full_cmd, node->full_path,g_global);
 		if (!node->full_path || !node->full_cmd[0] || !node->full_cmd[0][0])
 			ft_perror(NOT_CMD, *node->full_cmd, 127);
 	}
 	return (dir);
 }
 
-void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path)
+void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path,t_glob g_global)
 {
 	t_input	*node;
 	DIR		*dir;
 
 	node = cmd->content;
-	dir = cmd_checks(prompt, cmd, &s, path);
+	dir = cmd_checks(prompt, cmd, &s, path,g_global);
 	if (!is_builtins(node) && node && node->full_cmd && dir)
 		ft_perror(IS_DIR, *node->full_cmd, 126);
 	else if (!is_builtins(node) && node && node->full_path && \
@@ -83,11 +83,11 @@ void	get_cmd(t_prompt *prompt, t_list *cmd, char **s, char *path)
 	ft_free_matrix(&s);
 }
 
-void	*exec_cmd(t_prompt *prompt, t_list *cmd)
+void	*exec_cmd(t_prompt *prompt, t_list *cmd,t_glob g_global)
 {
 	int		fd[2];
 
-	get_cmd(prompt, cmd, NULL, NULL);
+	get_cmd(prompt, cmd, NULL, NULL, g_global);
 	if (pipe(fd) == -1)
 		return (ft_perror(PIPE_ERR, NULL, 1));
 	if (!check_to_fork(prompt, cmd, fd))
