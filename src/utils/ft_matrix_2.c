@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-extern t_glob	g_global;
+//extern t_glob	g_global;
 
 char	**ft_dup_matrix(char **m,t_glob *g_global)
 {
