@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:58:07 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:41:04 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:43:32 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_input	*get_params(t_input *node, char **a[2], int *i,t_glob *g_global)
 	return (node);
 }
 
-static char	**get_trimmed(char **args,t_glob g_global)
+static char	**get_trimmed(char **args,t_glob *g_global)
 {
 	char	**temp;
 	char	*aux;
@@ -73,7 +73,7 @@ static char	**get_trimmed(char **args,t_glob g_global)
 	return (temp);
 }
 
-static t_list	*stop_fill(t_list *cmds, char **args, char **temp,t_glob g_global)
+static t_list	*stop_fill(t_list *cmds, char **args, char **temp)
 {
 	ft_lstclear(&cmds, free_content);
 	ft_free_matrix(&temp);
@@ -81,13 +81,13 @@ static t_list	*stop_fill(t_list *cmds, char **args, char **temp,t_glob g_global)
 	return (NULL);
 }
 
-t_list	*fill_nodes(char **args, int i,t_glob g_global)
+t_list	*fill_nodes(char **args, int i,t_glob *g_global)
 {
 	t_list	*cmds[2];
 	char	**temp[2];
 
 	cmds[0] = NULL;
-	temp[1] = get_trimmed(args,g_global);
+	temp[1] = get_trimmed(args, g_global);
 	while (args[++i])
 	{
 		cmds[1] = ft_lstlast(cmds[0]);
@@ -100,7 +100,7 @@ t_list	*fill_nodes(char **args, int i,t_glob g_global)
 		temp[0] = args;
 		cmds[1]->content = get_params(cmds[1]->content, temp, &i,g_global);
 		if (i < 0)
-			return (stop_fill(cmds[0], args, temp[1],g_global));
+			return (stop_fill(cmds[0], args, temp[1]));
 		if (!args[i])
 			break ;
 	}
