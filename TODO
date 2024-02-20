@@ -1,1 +1,2 @@
 error code only about last command of chained command 
+valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=readline-leaks.sup --trace-children=yes ./minishell
