@@ -115,6 +115,7 @@ int		ft_strchr_i(const char *s, int c);
 int		ft_strchars_i(const char *s, char *set);
 void	*my_ptr(void *init_ptr);
 void	print_error_heredoc(char c, int *i, t_glob *g_global);
+int		whath_is(char ***a, int *i);
 /*--[ft_matrix.c]--*/
 void	ft_free_matrix(char ***m);
 char	**ft_extend_matrix(char **in, char *newstr, t_glob *g_global);

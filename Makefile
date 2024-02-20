@@ -42,6 +42,7 @@ SRC	= main.c \
 		commandes/get_cmd.c \
 		utils/ft_strtrim_all.c \
 		utils/utils_1.c \
+		utils/utils_2.c \
 		utils/ft_matrix.c \
 		utils/ft_matrix_2.c 
 
