@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:56:41 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:26:31 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ void	*my_ptr(void *init_ptr);
 void	print_error_heredoc(char c, int *i);
 /*--[ft_matrix.c]--*/
 void	ft_free_matrix(char ***m);
-char	**ft_extend_matrix(char **in, char *newstr, t_glob g_global);
+char	**ft_extend_matrix(char **in, char *newstr, t_glob *g_global);
 int		ft_matrixlen(char **m);
-char	**ft_matrix_replace_in(char ***big, char **small, int n, t_glob g_global);
+char	**ft_matrix_replace_in(char ***big, char **small, int n, t_glob *g_global);
 int		ft_putmatrix_fd(char **m, int nl, int fd);
 /*--[ft_matrix_2.c]--*/
 char	**ft_dup_matrix(char **m,t_glob g_global);
@@ -130,8 +130,8 @@ t_input	*get_pipein2(t_input *node, char **args, int *i);
 /*--[get_cmd.c]--*/
 void	*exec_cmd(t_prompt *prompt, t_list *cmd,t_glob g_global);
 /*--[expend.c]--*/
-char	*expand_path(char *s, int i, int quotes[2], char *var);
-char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt, t_glob g_global);
+char	*expand_path(char *s, int i, int quotes[2], char *var, t_glob *g_global);
+char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt, t_glob *g_global);
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdsubsplit(char const *s, char *set);
 /*--[ft_cmdsubsplit.c ]--*/

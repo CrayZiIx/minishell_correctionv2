@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 16:08:20 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:23:56 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:25:20 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_free_matrix(char ***m)
 		*m = NULL;
 }
 
-char	**ft_extend_matrix(char **in, char *newstr, t_glob g_global)
+char	**ft_extend_matrix(char **in, char *newstr, t_glob *g_global)
 {
 	char	**out;
 	int		len;
