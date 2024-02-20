@@ -83,7 +83,7 @@ typedef enum e_rl_error
 /*FUNCTIONS*/
 /*---------*/
 /*--[exec.c]--*/
-void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global);
+void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	*g_global);
 /*--[signal.c]--*/
 void	handle_sigint_cmd(int sig);
 void	handle_sigint(int sig);
@@ -97,7 +97,7 @@ int		builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n,t_glob g_global
 int		is_builtins(t_input *node);
 int		ft_pwd(void);
 int		ft_echo(t_list *cmd);
-int		ft_cd(t_prompt *p,t_glob g_global);
+int		ft_cd(t_prompt *p,t_glob *g_global);
 /*--[utils_1.c]--*/
 int		ft_countchar(char *s, char c);
 int		ft_strchr_i(const char *s, int c);

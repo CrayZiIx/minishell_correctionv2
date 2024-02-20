@@ -63,8 +63,8 @@ static t_prompt	init_prompt(char **argv, char **envp, t_glob *g_global)
 	s = NULL;
 	prompt.cmds = NULL;
 	prompt.envp = ft_dup_matrix(envp, g_global);
-	g_global.g_state_old = 0;
-	g_global.g_state = 0;
+	g_global->g_state_old = 0;
+	g_global->g_state = 0;
 	ft_getpid(&prompt, g_global);
 	prompt = init_var(prompt, s, argv, g_global);
 	return (prompt);
@@ -76,8 +76,8 @@ int	main(int ac, char **av, char **envp)
 	t_prompt	prompt;
 	t_glob g_global;
 
-	gc_init(&g_global->gc);
-	prompt = init_prompt(av, envp, g_global);
+	gc_init(&g_global.gc);
+	prompt = init_prompt(av, envp, &g_global);
 	while (ac)
 	{
 		g_global.g_state_old = g_global.g_state;

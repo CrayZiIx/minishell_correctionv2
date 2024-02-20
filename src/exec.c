@@ -37,7 +37,7 @@ static void	child_builtin(t_prompt *prompt, t_input *node, int l, t_list *cmd, t
 	}
 }
 
-static void	*child_redir(t_list *cmd, int fd[2], t_glob g_global)
+static void	*child_redir(t_list *cmd, int fd[2], t_glob *g_global)
 {
 	t_input	*node;
 
@@ -60,7 +60,7 @@ static void	*child_redir(t_list *cmd, int fd[2], t_glob g_global)
 	return ("");
 }
 
-static void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global)
+static void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	*g_global)
 {
 	t_input	*node;
 	int		l;
@@ -71,15 +71,15 @@ static void	*child_process(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_gl
 		l = ft_strlen(*node->full_cmd);
 	child_redir(cmd, fd, g_global);
 	close(fd[READ_END]);
-	child_builtin(prompt, node, l, cmd, g_global);
-	wait(&g_global.g_state);
-	g_global.g_state = WEXITSTATUS(g_global.g_state);
+	child_builtin(prompt, node, l, cmd, *g_global);
+	wait(&g_global->g_state);
+	g_global->g_state = WEXITSTATUS(g_global.g_state);
 	ft_lstclear(&prompt->cmds, free_content);
-	gc_clean(&g_global.gc);
-	exit(g_global.g_state);
+	gc_clean(&g_global->gc);
+	exit(g_global->g_state);
 }
 
-static void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global)
+static void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	*g_global)
 {
 	pid_t	pid;
 
@@ -93,10 +93,10 @@ static void	exec_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global)
 	else if (!pid)
 		child_process(prompt, cmd, fd, g_global);
 	else
-		wait(&g_global.g_state);
+		wait(&g_global->g_state);
 }
 
-void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global)
+void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	*g_global)
 {
 	t_input	*node;
 	DIR		*dir;
@@ -112,9 +112,9 @@ void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global)
 		exec_fork(prompt, cmd, fd, g_global);
 	else if (!is_builtins(node) && ((node->full_path && \
 		!access(node->full_path, F_OK)) || dir))
-		g_global.g_state = 126;
+		g_global->g_state = 126;
 	else if (!is_builtins(node) && node->full_cmd)
-		g_global.g_state = 127;
+		g_global->g_state = 127;
 	if (dir)
 		closedir(dir);
 	return ("");
