@@ -12,8 +12,7 @@
 
 #include "../inc/minishell.h"
 
-// extern t_glob	g_global;
-extern int g_sig_int;
+extern int		g_sig_int;
 
 void	sig(int sig)
 {
@@ -31,10 +30,12 @@ void	setup_sigaction(int sig, int flags, void (*f)(int))
 	sigaction(sig, &action, 0);
 }
 
-static char	*get_here_str(char *s[2], size_t len, char *limit, char *warn, t_glob *g_global)
+static char	*get_here_str(char *s[2], char *limit, char *warn, t_glob *g_global)
 {
 	char				*temp;
+	size_t				len;
 
+	len = 0;
 	while (g_global->g_state != 130 && (!s[0] || ft_strncmp(s[0], limit, len) \
 		|| ft_strlen(limit) != len))
 	{
@@ -65,10 +66,10 @@ int	get_here_doc(char *s[2], char *aux[2], t_glob *g_global)
 	g_global->g_state = 0;
 	if (pipe(fd) == -1)
 	{
-		ft_perror(PIPE_ERR, NULL, 1, g_global );
+		ft_perror(PIPE_ERR, NULL, 1, g_global);
 		return (-1);
 	}
-	s[1] = get_here_str(s, 0, aux[0], aux[1], g_global );
+	s[1] = get_here_str(s, aux[0], aux[1], g_global);
 	if (s[1] == NULL)
 		ft_putchar_fd('\n', 2);
 	write(fd[WRITE_END], s[1], ft_strlen(s[1]));
