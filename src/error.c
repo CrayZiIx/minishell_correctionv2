@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 21:04:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:14:42 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:40:47 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 // extern t_glob	g_global;
 
-void	*ft_perror(int err_type, char *param, int err, t_glob g_global)
+void	*ft_perror(int err_type, char *param, int err, t_glob *g_global)
 {
-	g_global.g_state = err;
+	g_global->g_state = err;
 	if (err_type == QUOTE)
 		ft_putstr_fd("Error: missing quote !\n", 2);
 	else if (err_type == NO_DIR)
@@ -97,7 +97,7 @@ int	ft_exit(t_list *cmd, int *is_exit)
 	return (status[0]);
 }
 
-void	cd_error(char **s[2], t_glob g_global)
+void	cd_error(char **s[2], t_glob *g_global)
 {
 	DIR	*dir;
 
@@ -106,11 +106,11 @@ void	cd_error(char **s[2], t_glob g_global)
 		dir = opendir(s[0][1]);
 	if (!s[0][1] && s[1][0] && !s[1][0][0])
 	{
-		g_global.g_state = 1;
+		g_global->g_state = 1;
 		ft_putstr_fd("minishell: error: HOME not set !\n", 2);
 	}
 	if (s[1][0] && !s[0][1])
-		g_global.g_state = chdir(s[1][0]) == -1;
+		g_global->g_state = chdir(s[1][0]) == -1;
 	if (s[0][1] && dir && access(s[0][1], F_OK) != -1)
 		chdir(s[0][1]);
 	else if (s[0][1] && access(s[0][1], F_OK) == -1)

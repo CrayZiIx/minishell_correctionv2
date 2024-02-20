@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:32:32 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:41:26 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	*check_to_fork(t_prompt *prompt, t_list *cmd, int fd[2], t_glob	g_global);
 void	handle_sigint_cmd(int sig);
 void	handle_sigint(int sig);
 /*--[error.c]--*/
-void	*ft_perror(int err_type, char *param, int err, t_glob g_global);
+void	*ft_perror(int err_type, char *param, int err, t_glob *g_global);
 int		ft_exit(t_list *cmd, int *is_exit);
 void	free_content(void *content);
 void	cd_error(char **s[2], t_glob g_global);

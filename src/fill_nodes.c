@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:58:07 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 20:29:10 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:41:04 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_input	*ft_init(void)
 	return (input);
 }
 
-static t_input	*get_params(t_input *node, char **a[2], int *i,t_glob g_global)
+static t_input	*get_params(t_input *node, char **a[2], int *i,t_glob *g_global)
 {
 	if (a[0][*i])
 	{
@@ -47,7 +47,7 @@ static t_input	*get_params(t_input *node, char **a[2], int *i,t_glob g_global)
 			node->full_cmd = ft_extend_matrix(node->full_cmd, a[1][*i],g_global);
 		else
 		{
-			ft_perror(PIPES_ERR, NULL, 2,g_global);
+			ft_perror(PIPES_ERR, NULL, 2, g_global);
 			*i = -2;
 		}
 		return (node);
