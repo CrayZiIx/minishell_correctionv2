@@ -47,12 +47,12 @@ static t_input	*get_params(t_input *node, char **a[2], int *i,t_glob g_global)
 			node->full_cmd = ft_extend_matrix(node->full_cmd, a[1][*i],g_global);
 		else
 		{
-			ft_perror(PIPES_ERR, NULL, 2);
+			ft_perror(PIPES_ERR, NULL, 2,g_global);
 			*i = -2;
 		}
 		return (node);
 	}
-	ft_perror(PIPES_ERR, NULL, 2);
+	ft_perror(PIPES_ERR, NULL, 2,g_global);
 	*i = -2;
 	return (node);
 }
