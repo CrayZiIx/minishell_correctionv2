@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:43:48 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:53:30 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,11 @@ char	**ft_setenv(char *var, char *value, char **envp, t_glob *g_global);
 int		ft_export(t_prompt *prompt, t_glob *g_global);
 int		ft_unset(t_prompt *prompt, t_glob *g_global);
 /*--[get_params.c ]--*/
-int		get_fd(int oldfd, char *path, int flags[2]);
-t_input	*get_pipeout1(t_input *node, char **args, int *i);
-t_input	*get_pipeout2(t_input *node, char **args, int *i);
-t_input	*get_pipein1(t_input *node, char **args, int *i);
-t_input	*get_pipein2(t_input *node, char **args, int *i);
+int		get_fd(int oldfd, char *path, int flags[2], t_glob *g_global);
+t_input	*get_pipeout1(t_input *node, char **args, int *i, t_glob *g_global);
+t_input	*get_pipeout2(t_input *node, char **args, int *i, t_glob *g_global);
+t_input	*get_pipein1(t_input *node, char **args, int *i, t_glob *g_global);
+t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global);
 /*--[get_cmd.c]--*/
 void	*exec_cmd(t_prompt *prompt, t_list *cmd,t_glob g_global);
 /*--[expend.c]--*/

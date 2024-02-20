@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 21:52:20 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:52:31 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-int	get_fd(int oldfd, char *path, int flags[2])
+int	get_fd(int oldfd, char *path, int flags[2], t_glob *g_global)
 {
 	int	fd;
 
@@ -23,9 +23,9 @@ int	get_fd(int oldfd, char *path, int flags[2])
 	if (!path)
 		return (-1);
 	if (access(path, F_OK) == -1 && !flags[0])
-		ft_perror(NOT_DIR, path, 127);
+		ft_perror(NOT_DIR, path, 127, g_global);
 	else if (!flags[0] && access(path, R_OK) == -1)
-		ft_perror(NO_PERM, path, 126);
+		ft_perror(NO_PERM, path, 126, g_global);
 	if (flags[0] && flags[1])
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
 	else if (flags[0] && !flags[1])
@@ -37,7 +37,7 @@ int	get_fd(int oldfd, char *path, int flags[2])
 	return (fd);
 }
 
-t_input	*get_pipeout1(t_input *node, char **args, int *i)
+t_input	*get_pipeout1(t_input *node, char **args, int *i, t_glob *g_global)
 {
 	int		flags[2];
 
@@ -45,19 +45,19 @@ t_input	*get_pipeout1(t_input *node, char **args, int *i)
 	flags[1] = 0;
 	(*i)++;
 	if (args[*i])
-		node->pipeout = get_fd(node->pipeout, args[*i], flags);
+		node->pipeout = get_fd(node->pipeout, args[*i], flags, g_global);
 	if (!args[*i] || node->pipeout == -1)
 	{
 		*i = -1;
 		if (node->pipeout != -1)
 			print_error_heredoc('0', i);
 		else
-			g_global.g_state = 1;
+			g_global->g_state = 1;
 	}
 	return (node);
 }
 
-t_input	*get_pipeout2(t_input *node, char **args, int *i)
+t_input	*get_pipeout2(t_input *node, char **args, int *i, t_glob *g_global)
 {
 	int	flags[2];
 
@@ -70,7 +70,7 @@ t_input	*get_pipeout2(t_input *node, char **args, int *i)
 		return (node);
 	}
 	if (args[++(*i)])
-		node->pipeout = get_fd(node->pipeout, args[*i], flags);
+		node->pipeout = get_fd(node->pipeout, args[*i], flags, g_global);
 	if (!args[*i] || node->pipeout == -1)
 	{
 		*i = -1;
@@ -79,12 +79,12 @@ t_input	*get_pipeout2(t_input *node, char **args, int *i)
 			print_error_heredoc('0', i);
 		}
 		else
-			g_global.g_state = 1;
+			g_global->g_state = 1;
 	}
 	return (node);
 }
 
-t_input	*get_pipein1(t_input *node, char **args, int *i)
+t_input	*get_pipein1(t_input *node, char **args, int *i, t_glob *g_global)
 {
 	int		flags[2];
 
@@ -92,19 +92,19 @@ t_input	*get_pipein1(t_input *node, char **args, int *i)
 	flags[1] = 0;
 	(*i)++;
 	if (args[*i])
-		node->pipein = get_fd(node->pipein, args[*i], flags);
+		node->pipein = get_fd(node->pipein, args[*i], flags, g_global);
 	if (!args[*i] || node->pipein == -1)
 	{
 		*i = -1;
 		if (node->pipein != -1)
 			print_error_heredoc('0', i);
 		else
-			g_global.g_state = 1;
+			g_global->g_state = 1;
 	}
 	return (node);
 }
 
-t_input	*get_pipein2(t_input *node, char **args, int *i)
+t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global)
 {
 	char	*aux[2];
 	char	*str[2];
