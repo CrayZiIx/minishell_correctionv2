@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 21:48:12 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:21:16 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	*parse_args(char **args, t_prompt *p, t_glob *g_global)
 	if (!p->cmds)
 		return (p);
 	i = ft_lstsize(p->cmds);
-	g_global->g_state = builtins(p, p->cmds, &is_exit, 0, g_global);
+	g_global->g_state = builtins(p, p->cmds, &is_exit, g_global);
 	while (i-- > 0)
 		waitpid(-1, &g_global->g_state, 0);
 	if (args && is_exit)

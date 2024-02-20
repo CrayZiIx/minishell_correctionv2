@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 21:45:41 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:20:54 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		ft_exit(t_list *cmd, int *is_exit);
 void	free_content(void *content);
 void	cd_error(char **s[2], t_glob *g_global);
 /*--[builtins_1.c]--*/
-int		builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n,t_glob *g_global);
+int		builtins(t_prompt *prompt, t_list *cmd, int *is_exit, t_glob *g_global);
 int		is_builtins(t_input *node);
 int		ft_pwd(void);
 int		ft_echo(t_list *cmd);
