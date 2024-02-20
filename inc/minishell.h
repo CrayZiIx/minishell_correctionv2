@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 00:16:54 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:39:06 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,9 @@ t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global);
 /*--[get_cmd.c]--*/
 void	*exec_cmd(t_prompt *prompt, t_list *cmd, t_glob *g_global);
 /*--[expend.c]--*/
-char	*expand_path(char *s, int i, int quotes[2], char *var, t_glob *g_global);
-char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt, t_glob *g_global);
+char	*expand_path(t_double_str *dstr, int i,
+			int quotes[2], t_glob *g_global);
+char	*expand_vars(char *s, int i, int quotes[2], t_pt *pt);
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdsubsplit(char const *s, char *set, t_glob *g_global);
 /*--[ft_cmdsubsplit.c ]--*/

@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 22:21:16 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:38:32 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,21 @@
 
 static char	**split_all(char **args, t_prompt *prompt, t_glob *g_global)
 {
-	char	**subsplit;
-	int		i;
-	int		quotes[2];
+	char			**subsplit;
+	int				i;
+	int				quotes[2];
+	t_double_str	dstr;
+	t_pt			pt;
 
+	pt.g_global = g_global;
+	pt.prompt = prompt;
 	i = -1;
 	while (args && args[++i])
 	{
-		args[i] = expand_vars(args[i], -1, quotes, prompt, g_global);
-		args[i] = expand_path(args[i], -1, quotes, \
-			ft_getenv("HOME", prompt->envp, 4, g_global), g_global);
+		dstr.s = args[i];
+		dstr.set = ft_getenv("HOME", prompt->envp, 4, g_global);
+		args[i] = expand_vars(args[i], -1, quotes, &pt);
+		args[i] = expand_path(&dstr, -1, quotes, g_global);
 		subsplit = ft_cmdsubsplit(args[i], "<|>", g_global);
 		ft_matrix_replace_in(&args, subsplit, i, g_global);
 		i += ft_matrixlen(subsplit) - 1;
