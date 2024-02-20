@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 23:29:41 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 23:35:33 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ typedef struct s_input
 
 typedef struct s_double_str
 {
-	char *s;
-	char *set;
+	char	*s;
+	char	*set;
 }				t_double_str;
 /*---------*/
 /*--TYPES--*/
