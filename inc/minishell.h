@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 23:55:45 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:16:54 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		is_builtins(t_input *node);
 int		ft_pwd(void);
 int		ft_echo(t_list *cmd);
 int		ft_cd(t_prompt *p, t_glob *g_global);
-/*--[utils_1.c]--*/child_builtin
+/*--[utils_1.c]--*/
 int		ft_countchar(char *s, char c);
 int		ft_strchr_i(const char *s, int c);
 int		ft_strchars_i(const char *s, char *set);

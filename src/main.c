@@ -6,14 +6,14 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:30:30 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:16:21 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 // extern t_glob	g_global;
-extern int	sig_int;
+extern int	g_sig_int;
 /*DESCRPTION*/
 static void	ft_getpid(t_prompt *prompt, t_glob *g_global)
 {
@@ -81,14 +81,14 @@ int	main(int ac, char **av, char **envp)
 	while (ac)
 	{
 		g_global.g_state_old = g_global.g_state;
-		sig_int = 0;
+		g_sig_int = 0;
 		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		out = readline("guest@minishell $ ");
 		signal(SIGINT, handle_sigint_cmd);
 		if (!check_args(out, &prompt, &g_global))
 			break ;
-		if (sig_int)
+		if (g_sig_int)
 			g_global.g_state = 130;
 		else if (WIFEXITED(g_global.g_state))
 			g_global.g_state = WEXITSTATUS(g_global.g_state);

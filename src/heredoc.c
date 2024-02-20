@@ -6,19 +6,19 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:29:43 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 21:17:21 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:16:21 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 // extern t_glob	g_global;
-extern int sig_int;
+extern int g_sig_int;
 
 void	sig(int sig)
 {
 	if (sig == SIGINT)
-		sig_int = 1;
+		g_sig_int = 1;
 }
 
 void	setup_sigaction(int sig, int flags, void (*f)(int))
@@ -42,7 +42,7 @@ static char	*get_here_str(char *s[2], size_t len, char *limit, char *warn, t_glo
 		s[1] = ft_strjoin(s[1], s[0], &g_global->gc);
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		s[0] = get_next_line(STDIN_FILENO);
-		if (sig_int)
+		if (g_sig_int)
 			break ;
 		if (!s[0])
 		{
