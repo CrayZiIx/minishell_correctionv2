@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:53:30 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 21:23:00 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		ft_exit(t_list *cmd, int *is_exit);
 void	free_content(void *content);
 void	cd_error(char **s[2], t_glob *g_global);
 /*--[builtins_1.c]--*/
-int		builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n,t_glob g_global);
+int		builtins(t_prompt *prompt, t_list *cmd, int *is_exit, int n,t_glob *g_global);
 int		is_builtins(t_input *node);
 int		ft_pwd(void);
 int		ft_echo(t_list *cmd);
@@ -115,7 +115,7 @@ char	**ft_dup_matrix(char **m,t_glob *g_global);
 /*--[ft_strtrim_all.c ]--*/
 char	*ft_strtrim_all(char const *s1, int squote, int dquote);
 /*--[heredoc.c]*/
-int		get_here_doc(char *s[2], char *aux[2]);
+int	get_here_doc(char *s[2], char *aux[2], t_glob *g_global);
 /*--[env.c]--*/
 char	*ft_getenv(char *var, char **envp, int n, t_glob *g_global);
 char	**ft_setenv(char *var, char *value, char **envp, t_glob *g_global);
@@ -135,10 +135,11 @@ char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt, t_glob *g_glo
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdsubsplit(char const *s, char *set);
 /*--[ft_cmdsubsplit.c ]--*/
-char	**ft_cmdtrim(char const *s, char *set,t_glob g_global);
+char	**ft_cmdtrim(char const *s, char *set,t_glob *g_global);
+
 /*--[fill_nodes.c]--*/
 t_list	*fill_nodes(char **args, int i,t_glob *g_global);
 /*--[parse_args.c]--*/
-void	*check_args(char *out, t_prompt *p, t_glob g_global);
+void	*check_args(char *out, t_prompt *p, t_glob *g_global);
 
 #endif
