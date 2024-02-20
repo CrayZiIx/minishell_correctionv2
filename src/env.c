@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:02:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/17 12:30:33 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:14:52 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_glob	g_global;
 
-char	*ft_getenv(char *var, char **envp, int n)
+char	*ft_getenv(char *var, char **envp, int n, t_glob g_global)
 {
 	char	*s;
 	int		i;
@@ -38,13 +38,13 @@ char	*ft_getenv(char *var, char **envp, int n)
 	return (NULL);
 }
 
-char	**ft_setenv(char *var, char *value, char **envp, int n)
+char	**ft_setenv(char *var, char *value, char **envp, t_glob g_global)
 {
 	int		i[2];
 	char	*aux[2];
+	int n;
 
-	if (n < 0)
-		n = ft_strlen(var);
+	n = ft_strlen(var);
 	i[0] = -1;
 	aux[0] = ft_strjoin(var, "=", &g_global.gc);
 	aux[1] = ft_strjoin(aux[0], value, &g_global.gc);
@@ -81,7 +81,7 @@ static int	var_in_envp(char *argv, char **envp, int ij[2])
 	return (0);
 }
 
-int	ft_export(t_prompt *prompt)
+int	ft_export(t_prompt *prompt, t_glob g_global)
 {
 	int		ij[2];
 	int		pos;
@@ -109,7 +109,7 @@ int	ft_export(t_prompt *prompt)
 	return (0);
 }
 
-int	ft_unset(t_prompt *prompt)
+int	ft_unset(t_prompt *prompt, t_glob g_global)
 {
 	char	**argv;
 	char	*aux;

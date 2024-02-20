@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 19:03:27 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:19:40 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static char	**split_all(char **args, t_prompt *prompt)
 	i = -1;
 	while (args && args[++i])
 	{
-		args[i] = expand_vars(args[i], -1, quotes, prompt);
+		args[i] = expand_vars(args[i], -1, quotes, prompt, g_global);
 		args[i] = expand_path(args[i], -1, quotes, \
-			ft_getenv("HOME", prompt->envp, 4));
+			ft_getenv("HOME", prompt->envp, 4, g_global));
 		subsplit = ft_cmdsubsplit(args[i], "<|>");
 		ft_matrix_replace_in(&args, subsplit, i);
 		i += ft_matrixlen(subsplit) - 1;
@@ -34,7 +34,7 @@ static char	**split_all(char **args, t_prompt *prompt)
 	return (args);
 }
 
-static void	*parse_args(char **args, t_prompt *p)
+static void	*parse_args(char **args, t_prompt *p, t_glob g_global)
 {
 	int	is_exit;
 	int	i;
@@ -55,7 +55,7 @@ static void	*parse_args(char **args, t_prompt *p)
 	return (p);
 }
 
-void	*check_args(char *out, t_prompt *p)
+void	*check_args(char *out, t_prompt *p, t_glob g_global)
 {
 	char	**a;
 	t_input	*n;
@@ -72,12 +72,12 @@ void	*check_args(char *out, t_prompt *p)
 		ft_perror(QUOTE, NULL, 1);
 	if (!a)
 		return ("");
-	p = parse_args(a, p);
+	p = parse_args(a, p, g_global);
 	if (p && p->cmds)
 		n = p->cmds->content;
 	if (p && p->cmds && n && n->full_cmd && ft_lstsize(p->cmds) == 1)
 		p->envp = ft_setenv("_", n->full_cmd[ft_matrixlen(n->full_cmd) - 1], \
-			p->envp, 1);
+			p->envp, g_global);
 	if (p && p->cmds)
 		ft_lstclear(&p->cmds, free_content);
 	return (p);

@@ -6,16 +6,16 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 17:18:03 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:12:55 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-extern t_glob	g_global;
+// extern t_glob	g_global;
 
 /*DESCRPTION*/
-static void	ft_getpid(t_prompt *prompt)
+static void	ft_getpid(t_prompt *prompt, t_glob g_global)
 {
 	pid_t	pid;
 
@@ -35,7 +35,7 @@ static void	ft_getpid(t_prompt *prompt)
 	prompt->pid = pid - 1;
 }
 
-static t_prompt	init_var(t_prompt prompt, char *s, char **argv)
+static t_prompt	init_var(t_prompt prompt, char *s, char **argv, t_glob g_global)
 {
 	char	*num;
 
@@ -55,7 +55,7 @@ static t_prompt	init_var(t_prompt prompt, char *s, char **argv)
 	return (prompt);
 }
 
-static t_prompt	init_prompt(char **argv, char **envp)
+static t_prompt	init_prompt(char **argv, char **envp, t_glob g_global)
 {
 	t_prompt	prompt;
 	char		*s;
@@ -65,8 +65,8 @@ static t_prompt	init_prompt(char **argv, char **envp)
 	prompt.envp = ft_dup_matrix(envp);
 	g_global.g_state_old = 0;
 	g_global.g_state = 0;
-	ft_getpid(&prompt);
-	prompt = init_var(prompt, s, argv);
+	ft_getpid(&prompt, g_global);
+	prompt = init_var(prompt, s, argv, g_global);
 	return (prompt);
 }
 
@@ -74,11 +74,11 @@ int	main(int ac, char **av, char **envp)
 {
 	char		*out;
 	t_prompt	prompt;
+	t_glob g_global;
 
 	gc_init(&g_global.gc);
-	prompt = init_prompt(av, envp);
-	(void)ac;
-	while (666)
+	prompt = init_prompt(av, envp, g_global);
+	while (ac)
 	{
 		g_global.g_state_old = g_global.g_state;
 		g_global.sig_int = 0;

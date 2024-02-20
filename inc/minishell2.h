@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell2.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 19:31:37 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:26:32 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ void	*my_ptr(void *init_ptr);
 void	print_error_heredoc(char c, int *i);
 /*--[ft_matrix.c]--*/
 void	ft_free_matrix(char ***m);
-char	**ft_extend_matrix(char **in, char *newstr, t_glob g_global);
+char	**ft_extend_matrix(char **in, char *newstr);
 int		ft_matrixlen(char **m);
-char	**ft_matrix_replace_in(char ***big, char **small, int n, t_glob g_global);
+char	**ft_matrix_replace_in(char ***big, char **small, int n);
 int		ft_putmatrix_fd(char **m, int nl, int fd);
 /*--[ft_matrix_2.c]--*/
 char	**ft_dup_matrix(char **m,t_glob g_global);
@@ -141,4 +141,3 @@ t_list	*fill_nodes(char **args, int i);
 /*--[parse_args.c]--*/
 void	*check_args(char *out, t_prompt *p, t_glob g_global);
 
-#endif

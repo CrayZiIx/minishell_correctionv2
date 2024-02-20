@@ -37,7 +37,6 @@ SRC	= main.c \
 		parse_args.c \
 		signal.c \
 		builtins/builtins_1.c \
-		commandes/cmd_custom.c \
 		commandes/ft_cmdsubsplit.c \
 		commandes/ft_cmdtrim.c \
 		commandes/get_cmd.c \

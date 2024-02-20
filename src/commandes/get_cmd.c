@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:24:30 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/19 19:22:39 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:30:40 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static DIR	*cmd_checks(t_prompt *prompt, t_list *cmd, char ***s, char *path,t_gl
 	}
 	else if (!is_builtins(node) && node && node->full_cmd && !dir)
 	{
-		path = ft_getenv("PATH", prompt->envp, 4);
+		path = ft_getenv("PATH", prompt->envp, 4, g_global);
 		*s = ft_split(path, ':', &g_global.gc);
 		node->full_path = find_command(*s, *node->full_cmd, node->full_path,g_global);
 		if (!node->full_path || !node->full_cmd[0] || !node->full_cmd[0][0])
