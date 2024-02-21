@@ -83,16 +83,13 @@ static int	var_in_envp(char *argv, char **envp, int ij[2])
 
 int	ft_export(t_prompt *prompt, t_glob *g_global)
 {
-	int		i;
 	int		ij[2];
 	int		pos;
 	char	**argv;
 
-	i = 0;
 	argv = ((t_input *)prompt->cmds->content)->full_cmd;
 	if (ft_matrixlen(argv) >= 2 && argv[1] != NULL &&  check_arg(argv[1]) == 0)
 	{
-		printf("export OK \n");
 		ij[0] = 1;
 		while (argv[ij[0]])
 		{
