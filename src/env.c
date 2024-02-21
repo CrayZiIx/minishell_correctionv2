@@ -81,6 +81,14 @@ static int	var_in_envp(char *argv, char **envp, int ij[2])
 	return (0);
 }
 
+
+int 	check_arg(char c)
+{
+	if (ft_isalpha(c) == 0 || c != '_')
+		return (1);
+	return (0);
+}
+
 int	ft_export(t_prompt *prompt, t_glob *g_global)
 {
 	int		ij[2];
@@ -88,7 +96,7 @@ int	ft_export(t_prompt *prompt, t_glob *g_global)
 	char	**argv;
 
 	argv = ((t_input *)prompt->cmds->content)->full_cmd;
-	if (ft_matrixlen(argv) >= 2)
+	if (ft_matrixlen(argv) >= 2 && argv[1] != NULL &&  check_arg(argv[1][0]) == 0)
 	{
 		ij[0] = 1;
 		while (argv[ij[0]])
@@ -102,7 +110,7 @@ int	ft_export(t_prompt *prompt, t_glob *g_global)
 			ij[0]++;
 		}
 	}
-	else
+	else if(!argv[1])
 	{
 		ft_putmatrix_fd(prompt->envp, 1, 1);
 		g_global->g_state = 0;
