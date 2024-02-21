@@ -81,33 +81,18 @@ static int	var_in_envp(char *argv, char **envp, int ij[2])
 	return (0);
 }
 
-
-int 	check_arg(char *str,int i)
-{
-	if (str[0] == '=')
-	{
-		printf(" : export: `=%s': not a valid identifier\n",str);
-		return (1);
-	}
-	while (str[i] != '\0')
-	{
-		if (ft_isalpha(str[i]) == 0 || str[i] != '_')
-			i ++;
-		else
-			return (1);
-	}
-	return (0);
-}
-
 int	ft_export(t_prompt *prompt, t_glob *g_global)
 {
+	int		i;
 	int		ij[2];
 	int		pos;
 	char	**argv;
 
+	i = 0;
 	argv = ((t_input *)prompt->cmds->content)->full_cmd;
-	if (ft_matrixlen(argv) >= 2 && argv[1] != NULL &&  check_arg(argv[1],0) == 1)
+	if (ft_matrixlen(argv) >= 2 && argv[1] != NULL &&  check_arg(argv[1]) == 0)
 	{
+		printf("export OK \n");
 		ij[0] = 1;
 		while (argv[ij[0]])
 		{

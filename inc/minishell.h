@@ -124,6 +124,7 @@ void	print_error_heredoc(char c, int *i, t_glob *g_global);
 /*--[utils_2.c]--*/
 int		whath_is(char ***a, int *i);
 void	ft_close(int fd);
+int 	check_arg(char *str);
 /*--[ft_matrix.c]--*/
 void	ft_free_matrix(char ***m);
 char	**ft_extend_matrix(char **in, char *newstr, t_glob *g_global);
