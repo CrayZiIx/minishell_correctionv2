@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 00:19:16 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:02:57 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ int	main(int ac, char **av, char **envp)
 	}
 	rl_clear_history();
 	gc_clean(&g_global.gc);
-	exit(WEXITSTATUS(g_global.g_state));
+	exit(g_global.g_state);
 }
