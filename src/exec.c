@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 02:27:04 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 21:44:36 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:59:05 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ static void	*child_redir(t_list *cmd, int fd[2], t_glob *g_global)
 	{
 		if (dup2(node->pipein, STDIN_FILENO) == -1)
 			return (ft_perror(DUP_ERR, NULL, 1, g_global));
-		close(node->pipein);
+		ft_close(node->pipein);
 	}
 	if (node->pipeout != STDOUT_FILENO)
 	{
 		if (dup2(node->pipeout, STDOUT_FILENO) == -1)
 			return (ft_perror(DUP_ERR, NULL, 1, g_global));
-		close(node->pipeout);
+		ft_close(node->pipeout);
 	}
 	else if (cmd->next && dup2(fd[WRITE_END], STDOUT_FILENO) == -1)
 		return (ft_perror(DUP_ERR, NULL, 1, g_global));
-	close(fd[WRITE_END]);
+	ft_close(fd[WRITE_END]);
 	return ("");
 }
 
@@ -72,7 +72,7 @@ static void	*child_process(t_prompt *prompt, t_list *cmd,
 	if (node->full_cmd)
 		l = ft_strlen(*node->full_cmd);
 	child_redir(cmd, fd, g_global);
-	close(fd[READ_END]);
+	ft_close(fd[READ_END]);
 	child_builtin(&pt, node, l, cmd);
 	wait(&g_global->g_state);
 	g_global->g_state = WEXITSTATUS(pt.g_global->g_state);
@@ -89,8 +89,8 @@ static void	exec_fork(t_prompt *prompt, t_list *cmd,
 	pid = fork();
 	if (pid < 0)
 	{
-		close(fd[READ_END]);
-		close(fd[WRITE_END]);
+		ft_close(fd[READ_END]);
+		ft_close(fd[WRITE_END]);
 		ft_perror(FORK_ERR, NULL, 1, g_global);
 	}
 	else if (!pid)

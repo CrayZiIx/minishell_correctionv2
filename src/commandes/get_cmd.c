@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:24:30 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 23:54:30 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:59:05 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ void	*exec_cmd(t_prompt *prompt, t_list *cmd, t_glob *g_global)
 		return (ft_perror(PIPE_ERR, NULL, 1, g_global));
 	if (!check_to_fork(prompt, cmd, fd, g_global))
 		return (NULL);
-	close(fd[WRITE_END]);
+	ft_close(fd[WRITE_END]);
 	if (cmd->next && !((t_input *)cmd->next->content)->pipein)
 		((t_input *)cmd->next->content)->pipein = fd[READ_END];
 	else
-		close(fd[READ_END]);
+		ft_close(fd[READ_END]);
 	if (((t_input *)cmd->content)->pipein > 2)
-		close(((t_input *)cmd->content)->pipein);
+		ft_close(((t_input *)cmd->content)->pipein);
 	if (((t_input *)cmd->content)->pipeout > 2)
-		close(((t_input *)cmd->content)->pipeout);
+		ft_close(((t_input *)cmd->content)->pipeout);
 	return (NULL);
 }

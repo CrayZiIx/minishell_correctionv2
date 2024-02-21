@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:29:43 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 00:16:21 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 01:38:39 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static char	*get_here_str(char *s[2], char *limit, char *warn, t_glob *g_global)
 	{
 		temp = s[1];
 		s[1] = ft_strjoin(s[1], s[0], &g_global->gc);
+		if (s[0])
+			free(s[0]);
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		s[0] = get_next_line(STDIN_FILENO);
 		if (g_sig_int)
@@ -51,11 +53,10 @@ static char	*get_here_str(char *s[2], char *limit, char *warn, t_glob *g_global)
 			break ;
 		}
 		temp = s[0];
-		s[0] = ft_strjoin(s[0], "\n", &g_global->gc);
 		len = ft_strlen(s[0]) - 1;
 	}
 	signal(SIGINT, handle_sigint_cmd);
-	return (s[1]);
+	return (free(s[0]), s[1]);
 }
 
 int	get_here_doc(char *s[2], char *aux[2], t_glob *g_global)
@@ -73,10 +74,10 @@ int	get_here_doc(char *s[2], char *aux[2], t_glob *g_global)
 	if (s[1] == NULL)
 		ft_putchar_fd('\n', 2);
 	write(fd[WRITE_END], s[1], ft_strlen(s[1]));
-	close(fd[WRITE_END]);
+	ft_close(fd[WRITE_END]);
 	if (g_global->g_state == 130)
 	{
-		close(fd[READ_END]);
+		ft_close(fd[READ_END]);
 		return (-1);
 	}
 	setup_sigaction(SIGINT, SA_RESTART, handle_sigint_cmd);

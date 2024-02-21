@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 21:47:47 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 00:57:04 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	get_fd(int oldfd, char *path, int flags[2], t_glob *g_global)
 	int	fd;
 
 	if (oldfd > 2)
-		close(oldfd);
+		ft_close(oldfd);
 	if (!path)
 		return (-1);
 	if (access(path, F_OK) == -1 && !flags[0])

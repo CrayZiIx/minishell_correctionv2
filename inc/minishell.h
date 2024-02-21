@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 00:39:06 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 02:42:31 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ int		ft_strchr_i(const char *s, int c);
 int		ft_strchars_i(const char *s, char *set);
 void	*my_ptr(void *init_ptr);
 void	print_error_heredoc(char c, int *i, t_glob *g_global);
+/*--[utils_2.c]--*/
 int		whath_is(char ***a, int *i);
+void	ft_close(int fd);
 /*--[ft_matrix.c]--*/
 void	ft_free_matrix(char ***m);
 char	**ft_extend_matrix(char **in, char *newstr, t_glob *g_global);
@@ -143,13 +145,12 @@ t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global);
 void	*exec_cmd(t_prompt *prompt, t_list *cmd, t_glob *g_global);
 /*--[expend.c]--*/
 char	*expand_path(t_double_str *dstr, int i,
-			int quotes[2], t_glob *g_global);
+			int quotes[2], t_glob *g_global, char *stest);
 char	*expand_vars(char *s, int i, int quotes[2], t_pt *pt);
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdsubsplit(char const *s, char *set, t_glob *g_global);
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdtrim(char const *s, char *set, t_glob *g_global);
-
 /*--[fill_nodes.c]--*/
 t_list	*fill_nodes(char **args, int i, t_glob *g_global);
 /*--[parse_args.c]--*/

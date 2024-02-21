@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:44:47 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 00:37:57 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 02:48:31 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // extern t_glob	g_global;
 
 char	*expand_path(t_double_str *dstr, int i, int quotes[2],
-	t_glob *g_global)
+	t_glob *g_global, char *stest)
 {
 	char	*path;
 	char	*aux;
@@ -30,17 +30,17 @@ char	*expand_path(t_double_str *dstr, int i, int quotes[2],
 			dstr->s[i - 1] != '$'))
 		{
 			aux = ft_substr(dstr->s, 0, i, &g_global->gc);
-			path = ft_strjoin(aux, dstr->set, &g_global->gc);
+			path = ft_strjoin(aux, stest, &g_global->gc);
 			aux = ft_substr(dstr->s, i + 1, ft_strlen(dstr->s), &g_global->gc);
 			dstr->s = ft_strjoin(path, aux, &g_global->gc);
 			return (expand_path(dstr,
-					i + ft_strlen(dstr->set) - 1, quotes, g_global));
+					i + ft_strlen(stest) - 2, quotes, g_global, stest));
 		}
 	}
 	return (dstr->s);
 }
 
-static char	*get_substr_var(char *s, int i, t_prompt *prompt, t_glob *g_global)
+static char	*get_substr_var(char *s, int i, t_pt *pt)
 {
 	char	*aux;
 	int		pos;
@@ -50,15 +50,15 @@ static char	*get_substr_var(char *s, int i, t_prompt *prompt, t_glob *g_global)
 	pos = ft_strchars_i(&s[i], "|\"\'$?>< ") + (ft_strchr("$?", s[i]) != 0);
 	if (pos == -1)
 		pos = ft_strlen(s) - 1;
-	aux = ft_substr(s, 0, i - 1, &g_global->gc);
-	var = ft_getenv(&s[i], prompt->envp, \
-		ft_strchars_i(&s[i], "\"\'$|>< "), g_global);
+	aux = ft_substr(s, 0, i - 1, &pt->g_global->gc);
+	var = ft_getenv(&s[i], pt->prompt->envp, \
+		ft_strchars_i(&s[i], "\"\'$|>< "), pt->g_global);
 	if (!var && s[i] == '$')
-		var = ft_itoa(prompt->pid, &g_global->gc);
+		var = ft_itoa(pt->prompt->pid, &pt->g_global->gc);
 	else if (!var && s[i] == '?')
-		var = ft_itoa(g_global->g_state_old, &g_global->gc);
-	path = ft_strjoin(aux, var, &g_global->gc);
-	aux = ft_strjoin(path, &s[i + pos], &g_global->gc);
+		var = ft_itoa(pt->g_global->g_state_old, &pt->g_global->gc);
+	path = ft_strjoin(aux, var, &pt->g_global->gc);
+	aux = ft_strjoin(path, &s[i + pos], &pt->g_global->gc);
 	return (aux);
 }
 
@@ -73,8 +73,9 @@ char	*expand_vars(char *s, int i, int quotes[2], t_pt *pt)
 		if (!quotes[0] && s[i] == '$' && s[i + 1] && \
 			((ft_strchars_i(&s[i + 1], "/~%^{}:; ") && !quotes[1]) || \
 			(ft_strchars_i(&s[i + 1], "/~%^{}:;\"") && quotes[1])))
-			return (expand_vars(get_substr_var(s, ++i, pt->prompt,
-						pt->g_global), -1, quotes, pt));
+			{
+				return (expand_vars(get_substr_var(s, ++i, pt), -1, quotes, pt));
+			}
 	}
 	return (s);
 }
