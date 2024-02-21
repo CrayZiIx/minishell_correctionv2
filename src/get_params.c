@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 05:52:13 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 06:22:01 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ t_input	*get_pipeout2(t_input *node, char **args, int *i, t_glob *g_global)
 	flags[0] = 1;
 	flags[1] = 0;
 	(*i)++;
-	if (args[3] && args[3][0] == '<')
+	if (args[2] && (args[2][0] == '<' || args[2][0] == '>'))
 	{
-		print_error_heredoc('<', i, g_global);
+		print_error_heredoc(args[2][0], i, g_global);
 		return (node);
 	}
 	if (args[++(*i)])
@@ -117,9 +117,9 @@ t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global)
 	aux[0] = NULL;
 	aux[1] = "minishell: warning: here-document delimited by end-of-file";
 	(*i)++;
-	if (args[3] && args[3][0] == '>')
+	if (args[2] && (args[2][0] == '<' || args[2][0] == '>'))
 	{
-		print_error_heredoc('>', i, g_global);
+		print_error_heredoc(args[2][0], i, g_global);
 		return (node);
 	}
 	if (args[++(*i)])
