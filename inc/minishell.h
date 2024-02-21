@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 02:58:49 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/21 05:36:26 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,16 @@ typedef struct s_double_str
 	char	*set;
 }				t_double_str;
 
+typedef struct s_double_sg
+{
+	t_glob	*g_global;
+	char	*set;
+}				t_double_sg;
+
 typedef struct s_pt
 {
-	t_prompt	*prompt;
 	t_glob		*g_global;
+	t_prompt	*prompt;
 }				t_pt;
 /*---------*/
 /*--TYPES--*/
@@ -113,10 +119,11 @@ int		ft_cd(t_prompt *p, t_glob *g_global);
 int		ft_countchar(char *s, char c);
 int		ft_strchr_i(const char *s, int c);
 int		ft_strchars_i(const char *s, char *set);
-void		*my_ptr(void *init_ptr);
-void		print_error_heredoc(char c, int *i, t_glob *g_global);
+void	*my_ptr(void *init_ptr);
+void	print_error_heredoc(char c, int *i, t_glob *g_global);
+/*--[utils_2.c]--*/
 int		whath_is(char ***a, int *i);
-void		ft_close(int fd);
+void	ft_close(int fd);
 /*--[ft_matrix.c]--*/
 void	ft_free_matrix(char ***m);
 char	**ft_extend_matrix(char **in, char *newstr, t_glob *g_global);
@@ -143,8 +150,8 @@ t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global);
 /*--[get_cmd.c]--*/
 void	*exec_cmd(t_prompt *prompt, t_list *cmd, t_glob *g_global);
 /*--[expend.c]--*/
-char	*expand_path(char *s, int i, int quotes[2], char *var, t_glob *g_global);
-char	*expand_vars(char *s, int i, int quotes[2], t_prompt *prompt, t_glob *g_global);
+char	*expand_path(char *s, int i, int quotes[2], t_double_sg *dsg);
+char	*expand_vars(char *s, int i, int quotes[2], t_pt *pt);
 /*--[ft_cmdsubsplit.c ]--*/
 char	**ft_cmdsubsplit(char const *s, char *set, t_glob *g_global);
 /*--[ft_cmdsubsplit.c ]--*/

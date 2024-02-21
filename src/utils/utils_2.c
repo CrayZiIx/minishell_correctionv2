@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamottet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:02:54 by mamottet          #+#    #+#             */
-/*   Updated: 2024/02/21 02:57:26 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/21 05:36:54 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	whath_is(char ***a, int *i)
 	else
 		return (0);
 }
+
 void	ft_close(int fd)
 {
 	if (fd != -1)
