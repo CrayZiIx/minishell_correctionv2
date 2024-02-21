@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 06:22:01 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 07:28:56 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,30 @@
 
 int	get_fd(int oldfd, char *path, int flags[2], t_glob *g_global)
 {
-	int	fd;
+	int		fd;
+	char	*s;
+	char	*cwd;
 
+	cwd = getcwd(NULL, 4096);
+	s = ft_strjoin(cwd, "/", &g_global->gc);
+	s = ft_strjoin(s, path, &g_global->gc);
 	if (oldfd > 2)
 		ft_close(oldfd);
 	if (!path)
 		return (-1);
-	if (access(path, F_OK) == -1 && !flags[0])
+	if (access(s, F_OK) == -1 && !flags[0])
 		ft_perror(NOT_DIR, path, 127, g_global);
-	else if (!flags[0] && access(path, R_OK) == -1)
+	else if (!flags[0] && access(s, R_OK) == -1)
 		ft_perror(NO_PERM, path, 126, g_global);
-	if (flags[0] && flags[1])
-		{
-			printf("kekz\n");
-			fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
-		}
+	if (!flags[0] && flags[1])
+		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
 	else if (flags[0] && !flags[1])
 		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	else if (!flags[0] && oldfd != -1)
 		fd = open(path, O_RDONLY);
 	else
 		fd = oldfd;
+	free(cwd);
 	return (fd);
 }
 
@@ -64,16 +67,17 @@ t_input	*get_pipeout2(t_input *node, char **args, int *i, t_glob *g_global)
 {
 	int	flags[2];
 
-	flags[0] = 1;
-	flags[1] = 0;
-	(*i)++;
-	if (args[2] && (args[2][0] == '<' || args[2][0] == '>'))
+	flags[0] = 0;
+	flags[1] = 1;
+	if (args[(*i) + 2] && (args[(*i) + 2][0] == '<' \
+		|| args[(*i) + 2][0] == '>'))
 	{
+		(*i) += 2;
 		print_error_heredoc(args[2][0], i, g_global);
 		return (node);
 	}
-	if (args[++(*i)])
-		node->pipeout = get_fd(node->pipeout, args[*i], flags, g_global);
+	if (args[(*i) + 2])
+		node->pipeout = get_fd(node->pipeout, args[(*i) += 2], flags, g_global);
 	if (!args[*i] || node->pipeout == -1)
 	{
 		*i = -1;
