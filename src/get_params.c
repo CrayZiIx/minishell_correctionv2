@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 00:57:04 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 05:52:13 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	get_fd(int oldfd, char *path, int flags[2], t_glob *g_global)
 	else if (!flags[0] && access(path, R_OK) == -1)
 		ft_perror(NO_PERM, path, 126, g_global);
 	if (flags[0] && flags[1])
-		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
+		{
+			printf("kekz\n");
+			fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
+		}
 	else if (flags[0] && !flags[1])
 		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	else if (!flags[0] && oldfd != -1)

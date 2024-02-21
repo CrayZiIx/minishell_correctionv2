@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:58:07 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 00:02:58 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 05:51:06 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ static t_input	*get_params(t_input *node, char **a[2],
 			&& a[0][*i + 1][0] != '<' )
 			node = get_pipein1(node, a[1], i, g_global);
 		else if (a[0][*i][0] == '>' && a[0][*i + 1] && a[0][*i + 1][0] == '>')
+		{
+			printf("bim\n");
 			node = get_pipeout2(node, a[1], i, g_global);
+		}
 		else if (a[0][*i][0] == '<' && a[0][*i + 1] && \
 			a[0][*i + 1][0] == '<')
 			node = get_pipein2(node, a[1], i, g_global);

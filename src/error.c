@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 21:04:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/20 20:40:47 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/21 05:45:47 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	free_content(void *content)
 	node = content;
 	ft_free_matrix(&node->full_cmd);
 	if (node->pipein != STDIN_FILENO)
-		close(node->pipein);
+		ft_close(node->pipein);
 	if (node->pipeout != STDOUT_FILENO)
-		close(node->pipeout);
+		ft_close(node->pipeout);
 }
