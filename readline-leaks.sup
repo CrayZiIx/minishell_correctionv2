@@ -1,8 +1,0 @@
-{
-   ignore_readline
-   Memcheck:Leak
-   fun:*alloc
-   ...
-   obj:*/libreadline.so.*
-   ...
-}
