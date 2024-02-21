@@ -20,19 +20,19 @@ void	*ft_perror(int err_type, char *param, int err, t_glob *g_global)
 	if (err_type == QUOTE)
 		ft_putstr_fd("Error: missing quote !\n", 2);
 	else if (err_type == NO_DIR)
-		ft_putstr_fd("Error: bro, this directory doesn't exist !\n", 2);
+		ft_putstr_fd("Error: no such file or directory: !\n", 2);
 	else if (err_type == NO_PERM)
-		ft_putstr_fd("Error: ask ur mom before using this !\n", 2);
+		ft_putstr_fd("Error: Permission denied\n", 2);
 	else if (err_type == NOT_CMD)
-		ft_putstr_fd("Error: bro, can u please type a real cmd !\n", 2);
+		ft_putstr_fd("Error: command not found!\n", 2);
 	else if (err_type == DUP_ERR)
 		ft_putstr_fd("Error: bro, dup2 failed ...\n", 2);
 	else if (err_type == FORK_ERR)
-		ft_putstr_fd("Error: bro, fork failed sorry !\n", 2);
+		ft_putstr_fd("Error: Cannot fork \n", 2);
 	else if (err_type == PIPE_ERR)
-		ft_putstr_fd("Error: bro, wtf  !\n", 2);
+		ft_putstr_fd("Error: pip error !\n", 2);
 	else if (err_type == PIPES_ERR)
-		ft_putstr_fd("Error: bro, pfff !\n", 2);
+		ft_putstr_fd("Error: mutli pip error !\n", 2);
 	else if (err_type == MEM)
 		ft_putstr_fd("Error: bro, mem this directory doesn't exist !\n", 2);
 	else if (err_type == IS_DIR)
