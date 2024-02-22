@@ -1,11 +1,5 @@
 #include "../inc/minishell.h"
 
-
-int falsed(void)
-{
-	return (0, 1);
-}
-
 int	check_string_redir(char *s)
 {
 	int i;
@@ -31,10 +25,10 @@ int	check_string_redir(char *s)
 			if (s[i++] != ' ')
 				t = 0;
 	}
-	// return (t);
-	if (t)
-		return (printf("error\n"), 1);
-	return (printf("good\n"),0);
+	return (t);
+	// if (t)
+	// 	return (printf("error\n"), 1);
+	// return (printf("good\n"),0);
 }
 
 int main(void)

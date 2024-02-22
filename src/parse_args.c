@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 20:09:07 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:14:35 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,45 +82,22 @@ int	check_string_redir(char *s)
 	while (s[i] != '\0')
 	{
 		if (t == 1 && (s[i] == '>' || s[i]== '<'))
-			return (printf("error\n", 1));
-		else if (t == 0 && (s[i] == '>' && s[i + 1]== '>') || (s[i] == '<' && s[i + 1]== '<'))
+			return (printf("error\n"), 1);
+		if ((s[i] == '>' && s[i + 1]== '>') || (s[i] == '<' && s[i + 1]== '<'))
 		{
 			i += 2;
 			t = 1;
 		}
-		else if (t == 0 && (s[i] == '>' || s[i]== '<'))
+		else if (t == 0 && (s[i] == '>' || s[i] == '<' || s[i] == '|'))
 		{
-			i += 2;
+			i += 1;
 			t = 1;
 		}
 		else
-		{
-			i++;
-			t = 0;
-		}
-		while (s[i] != '\0' && s[i] == ' ')
-			i++;
+			if (s[i++] != ' ')
+				t = 0;
 	}
-	if (t)
-		return (printf("error\n", 1));
-	return (printf("good\n", 0));
-}
-
-int	ctr(char *a, t_glob *g_global)
-{
-	int nb_cmd;
-	int index_cmd;
-	int is_token;
-	
-	n = ft_matrixlen(a);
-	i = 0;
-	while (a && a[i])
-	{
-		while (a[i] && a[i][j])
-		{
-			
-		}
-	}
+	return (t);
 }
 
 int	check_token_redir(char **a, t_glob *g_global)
@@ -128,11 +105,7 @@ int	check_token_redir(char **a, t_glob *g_global)
 	int	n;
 
 	n = ft_matrixlen(a);
-	printf("---------\n");
-	// ft_putmatrix_fd(a, 0, STDIN_FILENO);
-	ft_putendl_fd(a[0], STDIN_FILENO);
-	printf("---------\n");
-	if (n == 1 && (((a[0][0] == '>' || a[0][0] == '<' ) || ((a[0][0] == '>' && a[0][1] == '>' ) || (a[0][0] == '>' && a[0][1] == '>'))) || (a[0][2] == '|')))
+	if (check_string_redir(a[0]))
 		return (syntax_error(SYNTAXE_REDIR, NULL, g_global), 1);
 	else if (n == 2 && (((a[0][0] == '>' || a[0][0] == '<' )
 		|| ((a[0][0] == '>' && a[0][1] == '>' )
