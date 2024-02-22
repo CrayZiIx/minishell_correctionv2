@@ -21,8 +21,7 @@ static void	child_builtin(t_pt *pt, t_input *node, int l, t_list *cmd)
 	if (!is_builtins(node) && node->full_cmd)
 		execve(node->full_path, node->full_cmd, pt->prompt->envp);
 	else if (is_builtins(node) && node->full_cmd \
-		&& !ft_strncmp(*node->full_cmd, "pwd", l) \
-		&& l == 3)
+		&& !ft_strncmp(*node->full_cmd, "pwd", l) && l == 3)
 		pt->g_global->g_state = ft_pwd();
 	else if (is_builtins(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "echo", l) && l == 4)
