@@ -27,6 +27,7 @@ NAME = minishell
 SRC	= main.c \
 		env.c \
 		error.c \
+		syntax_error.c \
 		exec.c \
 		expend.c \
 		fill_nodes.c \

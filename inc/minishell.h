@@ -94,7 +94,9 @@ typedef enum e_rl_error
 	PIPES_ERR,
 	MEM,
 	IS_DIR,
-	NOT_DIR
+	NOT_DIR,
+	SYNTAXE_REDIR,
+	SYNTAXE_PIP
 }				t_rl_error;
 /*---------*/
 /*FUNCTIONS*/
@@ -106,6 +108,7 @@ void	handle_sigint_cmd(int sig);
 void	handle_sigint(int sig);
 /*--[error.c]--*/
 void	*ft_perror(int err_type, char *param, int err, t_glob *g_global);
+void	*syntax_error(int err_type, char *param, int err, t_glob *g_global);
 int		ft_exit(t_list *cmd, int *is_exit);
 void	free_content(void *content);
 void	cd_error(char **s[2], t_glob *g_global);

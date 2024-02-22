@@ -71,25 +71,25 @@ int	check_token_pipe(char **a)
 		return (0);
 }
 
-int	check_token_redir(char **a)
+int	check_token_redir(char **a, t_glob *g_global)
 {
 	int n;
 
 	n = ft_matrixlen(a);
-	if (n == 1 && ((a[0][0] == '>' || a[0][0] == '<' ) 
+	if (n == 1 && ((a[0][0] == '>' || a[0][0] == '<' )
 		|| ((a[0][0] == '>' && a[0][1] == '>' )
 		|| (a[0][0] == '>' && a[0][1] == '>'))))
-		return (printf("message error 1\n"), 1);
+		return (syntax_error(SYNTAXE_REDIR, NULL, 2, g_global), 1);
 	else if (n == 2 && (((a[0][0] == '>' || a[0][0] == '<' ) 
 		|| ((a[0][0] == '>' && a[0][1] == '>' )
 		|| (a[0][0] == '>' && a[0][1] == '>'))))
 		&& a[1][0] == '|')
-		return (printf("message error 2\n"), 1);
+		return (syntax_error(SYNTAXE_PIP, NULL, 2, g_global), 1);
 	else if (n > 1 && (((a[n - 1][0] == '>' || a[n - 1][0] == '<' ) 
 		|| ((a[n - 1][0] == '>' && a[n - 1][1] == '>' )
 		|| (a[n - 1][0] == '>' && a[n - 1][1] == '>'))))
 		&& a[n - 1][0] == '|')
-		return (printf("message error 3\n"), 1);
+		return (syntax_error(SYNTAXE_PIP, NULL, 2, g_global), 1);
 	return (0);
 
 }
@@ -110,7 +110,7 @@ void	*check_args(char *out, t_prompt *p, t_glob *g_global)
 	a = ft_cmdtrim(out, " ", g_global);
 	if (!a)
 		return (ft_perror(QUOTE, NULL, 1, g_global), "");
-	if (check_token_redir(a) || check_token_redir(a))
+	if (check_token_redir(a,g_global) || check_token_redir(a,g_global))
 		return ("");
 	p = parse_args(a, p, g_global);
 	if (p && p->cmds)
