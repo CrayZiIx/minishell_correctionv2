@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 21:04:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 17:52:13 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:28:40 by mamottet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_perror(int err_type, char *param, int err, t_glob *g_global)
 {
 	g_global->g_state = err;
 	if (err_type == QUOTE)
-		ft_putstr_fd("Error: missing quote !\n", 2);
+		ft_putstr_fd("Error: missing quote \n", 2);
 	else if (err_type == NO_DIR)
 		ft_putstr_fd("Error: no such file or directory: !\n", 2);
 	else if (err_type == NO_PERM)
