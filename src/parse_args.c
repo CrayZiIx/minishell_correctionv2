@@ -72,14 +72,29 @@ int	check_token_pipe(char **a)
 		return (0);
 }
 
+int	tester(char *s)
+{
+	int	i = 0;
+	int err = 0;
+	char c;
+	while (s[i] != '\0')
+	{
+		if (s[i] == '<')
+	}
+	if (s[i] == '>' || s[i] == '<')
+		err = 1;
+	if (err != 0)
+		return (1)
+	return (0);
+}
+
 int	check_token_redir(char **a, t_glob *g_global)
 {
 	int	n;
 
 	n = ft_matrixlen(a);
-	if (n == 1 && ((a[0][0] == '>' || a[0][0] == '<' )
-		|| ((a[0][0] == '>' && a[0][1] == '>' )
-		|| (a[0][0] == '>' && a[0][1] == '>'))))
+	printf("[%c]\n", a[0][2]);
+	if (n == 1 && (((a[0][0] == '>' || a[0][0] == '<' ) || ((a[0][0] == '>' && a[0][1] == '>' ) || (a[0][0] == '>' && a[0][1] == '>'))) || (a[0][2] == '|')))
 		return (syntax_error(SYNTAXE_REDIR, NULL, g_global), 1);
 	else if (n == 2 && (((a[0][0] == '>' || a[0][0] == '<' )
 		|| ((a[0][0] == '>' && a[0][1] == '>' )

@@ -22,8 +22,11 @@ void	syntax_error(int err_type, char **param, t_glob *g_global)
 	char	*tmp;
 
 	tmp = NULL;
-	tmp = ft_strjoin(ft_strjoin(param[0], ": ", g_global),
-			ft_strjoin(param[1], ": ", g_global), g_global);
+	if (param && ft_matrixlen(param) == 2)
+		tmp = ft_strjoin(ft_strjoin(param[0], ": ", g_global),
+				ft_strjoin(param[1], ": ", g_global), g_global);
+	else if (param)
+		tmp = ft_strjoin(param[0], ": ", g_global);
 	simple_put(tmp, 2);
 	if (err_type == SYNTAXE_REDIR)
 		ft_putendl_fd("syntax error near unexpected token `newline'", 2);
