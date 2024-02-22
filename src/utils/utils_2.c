@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:02:54 by mamottet          #+#    #+#             */
-/*   Updated: 2024/02/22 15:54:42 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:29:02 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ int	ft_isprint(int c)
 
 void	ft_strnull(char **tab, size_t n)
 {
-	size_t i = 0;
+	size_t	i;
+
+	i = 0;
 	while (i != n)
 	{
 		tab[i] = NULL;
 		i++;
 	}
 }
-

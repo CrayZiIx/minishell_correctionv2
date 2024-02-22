@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamottet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 15:50:59 by mamottet          #+#    #+#             */
-/*   Updated: 2024/02/22 15:51:07 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:37:35 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	ft_unset(t_prompt *prompt, t_glob *g_global)
 	}
 	return (0);
 }
+
 int	ft_env(t_pt *pt, t_list *cmd)
 {
 	t_input	*node;
@@ -72,7 +73,7 @@ int	ft_env(t_pt *pt, t_list *cmd)
 	if (node->full_cmd[1] == NULL)
 	{
 		ft_putmatrix_fd(pt->prompt->envp, 1, 1);
-		return(0);
+		return (0);
 	}
 	else
 	{

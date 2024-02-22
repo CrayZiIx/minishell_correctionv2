@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamottet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:30:40 by mamottet          #+#    #+#             */
-/*   Updated: 2024/02/22 14:45:47 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:40:30 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
 void	simple_put(char *str, int fd)
 {
-		ft_putstr_fd(str, fd);
+	ft_putstr_fd(str, fd);
 }
 
 void	syntax_error(int err_type, char **param, t_glob *g_global)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = NULL;
-	tmp = ft_strjoin(ft_strjoin(param[0],": ",g_global),
-		ft_strjoin(param[1],": ",g_global),g_global);
+	tmp = ft_strjoin(ft_strjoin(param[0], ": ", g_global),
+			ft_strjoin(param[1], ": ", g_global), g_global);
 	simple_put(tmp, 2);
 	if (err_type == SYNTAXE_REDIR)
 		ft_putendl_fd("syntax error near unexpected token `newline'", 2);

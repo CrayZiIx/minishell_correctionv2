@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mamottet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 15:47:46 by mamottet          #+#    #+#             */
-/*   Updated: 2024/02/22 15:47:48 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:37:04 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_cd(t_prompt *p, t_glob *g_global)
 int	ft_pwd(void)
 {
 	char	*buf;
-	
+
 	buf = getcwd(NULL, 4096);
 	ft_putendl_fd(buf, 1);
 	free(buf);

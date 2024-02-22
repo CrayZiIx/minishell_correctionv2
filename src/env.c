@@ -6,13 +6,11 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:02:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 15:08:08 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:31:01 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-// extern t_glob	g_global;
 
 char	*ft_getenv(char *var, char **envp, int n, t_glob *g_global)
 {
@@ -80,4 +78,3 @@ int	var_in_envp(char *argv, char **envp, int ij[2])
 	}
 	return (0);
 }
-
