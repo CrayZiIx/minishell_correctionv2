@@ -36,21 +36,14 @@ int	ft_cd(t_prompt *p, t_glob *g_global)
 	return (g_global->g_state);
 }
 
-void	ft_pwd(t_list *cmd, t_glob *g_global)
+int	ft_pwd(void)
 {
 	char	*buf;
-	t_input	*node;
-
-	node = cmd->content;
-	if (node->full_cmd[1] == NULL)
-	{
-		buf = getcwd(NULL, 4096);
-		ft_putendl_fd(buf, 1);
-		free(buf);
-		g_global->g_state = 0;
-	}
-	else
-		syntax_error(ARG_ERROR, "pwd", 1, g_global);
+	
+	buf = getcwd(NULL, 4096);
+	ft_putendl_fd(buf, 1);
+	free(buf);
+	return (0);
 }
 
 int	ft_echo(t_list *cmd)

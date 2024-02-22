@@ -64,7 +64,7 @@ int	ft_unset(t_prompt *prompt, t_glob *g_global)
 	}
 	return (0);
 }
-void	ft_env(t_pt *pt, t_list *cmd, t_glob *g_global)
+int	ft_env(t_pt *pt, t_list *cmd)
 {
 	t_input	*node;
 
@@ -72,8 +72,11 @@ void	ft_env(t_pt *pt, t_list *cmd, t_glob *g_global)
 	if (node->full_cmd[1] == NULL)
 	{
 		ft_putmatrix_fd(pt->prompt->envp, 1, 1);
-		g_global->g_state = 0;
+		return(0);
 	}
 	else
-		syntax_error(ARG_ERROR, "pwd", 1, g_global);
+	{
+		syntax_error(ARG_ERROR, node->full_cmd, pt->g_global);
+		return (127);
+	}
 }

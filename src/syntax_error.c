@@ -11,16 +11,23 @@
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	*syntax_error(int err_type, char *param, int err, t_glob *g_global)
+void	simple_put(char *str, int fd)
 {
-	g_global->g_state = err;
+		ft_putstr_fd(str, fd);
+}
+
+void	syntax_error(int err_type, char **param, t_glob *g_global)
+{
+	char *tmp;
+
+	tmp = NULL;
+	tmp = ft_strjoin(ft_strjoin(param[0],": ",g_global),
+		ft_strjoin(param[1],": ",g_global),g_global);
+	simple_put(tmp, 2);
 	if (err_type == SYNTAXE_REDIR)
 		ft_putendl_fd("syntax error near unexpected token `newline'", 2);
 	else if (err_type == SYNTAXE_PIP)
 		ft_putendl_fd("syntax error near unexpected token `|'", 2);
 	else if (err_type == ARG_ERROR)
 		ft_putendl_fd("too many arguments", 2);
-	ft_putendl_fd(param, 2);
-	return (NULL);
 }
