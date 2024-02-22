@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 14:36:49 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:30:16 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,12 @@ t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global)
 	str[1] = NULL;
 	aux[0] = NULL;
 	aux[1] = "minishell: warning: here-document delimited by end-of-file";
-	// (*i)++;
 	if (args[(*i) + 2] && (args[(*i) + 2][0] == '<' || args[(*i) + 2][0] == '>'))
 	{
-		printf("args[(*i) + 2][0] =%s\n", args[(*i) + 2]);
 		print_error_heredoc(args[(*i) + 2][0], i, g_global);
 		return (node);
 	}
+	(*i)++;
 	if (args[++(*i)])
 	{
 		aux[0] = args[*i];
