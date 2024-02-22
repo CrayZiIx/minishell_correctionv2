@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 15:12:17 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:31:47 by mamottet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,6 @@ int	check_token_pipe(char **a)
 	}
 	else
 		return (0);
-}
-
-int	tester(char *s)
-{
-	int	i = 0;
-	int err = 0;
-	char c;
-	while (s[i] != '\0')
-	{
-		if (s[i] == '<')
-	}
-	if (s[i] == '>' || s[i] == '<')
-		err = 1;
-	if (err != 0)
-		return (1)
-	return (0);
 }
 
 int	check_token_redir(char **a, t_glob *g_global)
