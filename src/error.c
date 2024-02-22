@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 21:04:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 14:03:22 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:46:26 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_exit(t_list *cmd, int *is_exit)
 		ft_putstr_fd("minishell exit: ", 2);
 		ft_putstr_fd(node->full_cmd[1], 2);
 		ft_putstr_fd(" : numeric args needed", 2);
-		return (255);
+		return (2);
 	}
 	else if (node->full_cmd[2])
 	{
