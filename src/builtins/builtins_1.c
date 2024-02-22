@@ -95,13 +95,20 @@ int	ft_cd(t_prompt *p, t_glob *g_global)
 	return (g_global->g_state);
 }
 
-int	ft_pwd(void)
+int	ft_pwd(t_list *cmd, t_glob *g_global)
 {
 	char	*buf;
+	t_input	*node;
 
-	buf = getcwd(NULL, 4096);
-	ft_putendl_fd(buf, 1);
-	free(buf);
+	node = cmd->content;
+	if (node->full_cmd[1] == NULL)
+	{
+		buf = getcwd(NULL, 4096);
+		ft_putendl_fd(buf, 1);
+		free(buf);
+	}
+	else
+		syntax_error(ARG_ERROR, "pwd", 1, g_global);
 	return (0);
 }
 

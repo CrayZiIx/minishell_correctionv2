@@ -92,6 +92,7 @@ typedef enum e_rl_error
 	FORK_ERR,
 	PIPE_ERR,
 	PIPES_ERR,
+	ARG_ERROR,
 	MEM,
 	IS_DIR,
 	NOT_DIR,
@@ -115,7 +116,7 @@ void	cd_error(char **s[2], t_glob *g_global);
 /*--[builtins_1.c]--*/
 int		builtins(t_prompt *prompt, t_list *cmd, int *is_exit, t_glob *g_global);
 int		is_builtins(t_input *node);
-int		ft_pwd(void);
+int		ft_pwd(t_list *cmd, t_glob *g_global);
 int		ft_echo(t_list *cmd);
 int		ft_cd(t_prompt *p, t_glob *g_global);
 /*--[utils_1.c]--*/
