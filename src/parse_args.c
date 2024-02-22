@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 15:12:17 by mamottet         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:09:07 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,20 +72,55 @@ int	check_token_pipe(char **a)
 		return (0);
 }
 
-int	tester(char *s)
+int	check_string_redir(char *s)
 {
-	int	i = 0;
-	int err = 0;
-	char c;
+	int i;
+	int t;
+
+	i = 0;
+	t = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == '<')
+		if (t == 1 && (s[i] == '>' || s[i]== '<'))
+			return (printf("error\n", 1));
+		else if (t == 0 && (s[i] == '>' && s[i + 1]== '>') || (s[i] == '<' && s[i + 1]== '<'))
+		{
+			i += 2;
+			t = 1;
+		}
+		else if (t == 0 && (s[i] == '>' || s[i]== '<'))
+		{
+			i += 2;
+			t = 1;
+		}
+		else
+		{
+			i++;
+			t = 0;
+		}
+		while (s[i] != '\0' && s[i] == ' ')
+			i++;
 	}
-	if (s[i] == '>' || s[i] == '<')
-		err = 1;
-	if (err != 0)
-		return (1)
-	return (0);
+	if (t)
+		return (printf("error\n", 1));
+	return (printf("good\n", 0));
+}
+
+int	ctr(char *a, t_glob *g_global)
+{
+	int nb_cmd;
+	int index_cmd;
+	int is_token;
+	
+	n = ft_matrixlen(a);
+	i = 0;
+	while (a && a[i])
+	{
+		while (a[i] && a[i][j])
+		{
+			
+		}
+	}
 }
 
 int	check_token_redir(char **a, t_glob *g_global)
@@ -93,7 +128,10 @@ int	check_token_redir(char **a, t_glob *g_global)
 	int	n;
 
 	n = ft_matrixlen(a);
-	printf("[%c]\n", a[0][2]);
+	printf("---------\n");
+	// ft_putmatrix_fd(a, 0, STDIN_FILENO);
+	ft_putendl_fd(a[0], STDIN_FILENO);
+	printf("---------\n");
 	if (n == 1 && (((a[0][0] == '>' || a[0][0] == '<' ) || ((a[0][0] == '>' && a[0][1] == '>' ) || (a[0][0] == '>' && a[0][1] == '>'))) || (a[0][2] == '|')))
 		return (syntax_error(SYNTAXE_REDIR, NULL, g_global), 1);
 	else if (n == 2 && (((a[0][0] == '>' || a[0][0] == '<' )
@@ -124,7 +162,7 @@ void	*check_args(char *out, t_prompt *p, t_glob *g_global)
 	a = ft_cmdtrim(out, " ", g_global);
 	if (!a)
 		return (ft_perror(QUOTE, NULL, 1, g_global), "");
-	if (check_token_redir(a, g_global) || check_token_redir(a, g_global))
+	if (check_token_redir(a, g_global))
 		return ("");
 	p = parse_args(a, p, g_global);
 	if (p && p->cmds)
