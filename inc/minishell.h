@@ -116,9 +116,12 @@ void	cd_error(char **s[2], t_glob *g_global);
 /*--[builtins_1.c]--*/
 int		builtins(t_prompt *prompt, t_list *cmd, int *is_exit, t_glob *g_global);
 int		is_builtins(t_input *node);
-int		ft_pwd(t_list *cmd, t_glob *g_global);
+void		ft_pwd(t_list *cmd, t_glob *g_global);
 int		ft_echo(t_list *cmd);
 int		ft_cd(t_prompt *p, t_glob *g_global);
+void		ft_env(t_pt *pt, t_list *cmd, t_glob *g_global);
+int	var_in_envp(char *argv, char **envp, int ij[2]);
+
 /*--[utils_1.c]--*/
 int		ft_countchar(char *s, char c);
 int		ft_strchr_i(const char *s, int c);

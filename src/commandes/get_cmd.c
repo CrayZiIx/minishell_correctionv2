@@ -109,3 +109,27 @@ void	*exec_cmd(t_prompt *prompt, t_list *cmd, t_glob *g_global)
 		ft_close(((t_input *)cmd->content)->pipeout);
 	return (NULL);
 }
+
+int	check_arg(char *str)
+{
+	int		i;
+
+	i = 0;
+	if (str[0] == '=' || ft_isdigit(str[0]) == 1)
+		return (printf(" : export: `%s': not a valid identifier\n", str), 1);
+	i ++;
+	while (str[i] != '\0' && str[i] != '=')
+	{
+		if (str[i] == ' ')
+			return (printf("export: `%c': not a valid identifier \n",
+					str[i - 1]), 1);
+		if (ft_isalpha(str[i]) == 1 || str[i] == '_'
+			|| ft_isalnum(str[i]) == 1 || str[i])
+			i ++;
+		else
+			return (1);
+	}
+	if (str[0] == ' ')
+		return (1);
+	return (0);
+}

@@ -22,16 +22,13 @@ static void	child_builtin(t_pt *pt, t_input *node, int l, t_list *cmd, t_glob *g
 		execve(node->full_path, node->full_cmd, pt->prompt->envp);
 	else if (is_builtins(node) && node->full_cmd \
 		&& !ft_strncmp(*node->full_cmd, "pwd", l) && l == 3)
-		pt->g_global->g_state = ft_pwd(cmd,g_global);
+		ft_pwd(cmd,g_global);
 	else if (is_builtins(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "echo", l) && l == 4)
 		pt->g_global->g_state = ft_echo(cmd);
 	else if (is_builtins(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "env", l) && l == 3)
-	{
-		ft_putmatrix_fd(pt->prompt->envp, 1, 1);
-		pt->g_global->g_state = 0;
-	}
+		ft_env(pt, cmd, g_global);
 }
 
 static void	*child_redir(t_list *cmd, int fd[2], t_glob *g_global)
