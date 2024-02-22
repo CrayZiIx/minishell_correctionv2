@@ -80,17 +80,17 @@ int	check_token_redir(char **a, t_glob *g_global)
 	if (n == 1 && ((a[0][0] == '>' || a[0][0] == '<' )
 		|| ((a[0][0] == '>' && a[0][1] == '>' )
 		|| (a[0][0] == '>' && a[0][1] == '>'))))
-		return (syntax_error(SYNTAXE_REDIR, NULL, 2, g_global), 1);
+		return (syntax_error(SYNTAXE_REDIR, NULL, g_global), 1);
 	else if (n == 2 && (((a[0][0] == '>' || a[0][0] == '<' )
 		|| ((a[0][0] == '>' && a[0][1] == '>' )
 		|| (a[0][0] == '>' && a[0][1] == '>'))))
 		&& a[1][0] == '|')
-		return (syntax_error(SYNTAXE_PIP, NULL, 2, g_global), 1);
+		return (syntax_error(SYNTAXE_PIP, NULL, g_global), 1);
 	else if (n > 1 && (((a[n - 1][0] == '>' || a[n - 1][0] == '<' )
 		|| ((a[n - 1][0] == '>' && a[n - 1][1] == '>' )
 		|| (a[n - 1][0] == '>' && a[n - 1][1] == '>'))))
 		&& a[n - 1][0] == '|')
-		return (syntax_error(SYNTAXE_PIP, NULL, 2, g_global), 1);
+		return (syntax_error(SYNTAXE_PIP, NULL, g_global), 1);
 	return (0);
 }
 
