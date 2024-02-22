@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 00:02:54 by mamottet          #+#    #+#             */
-/*   Updated: 2024/02/21 05:36:54 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:44:54 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,20 @@ void	ft_close(int fd)
 		close(fd);
 }
 
-int 	check_arg(char *str)
+int	check_arg(char *str)
 {
 	int		i;
 
 	i = 0;
 	if (str[0] == '=' || ft_isdigit(str[0]) == 1)
-		return (printf(" : export: `%s': not a valid identifier\n",str),1);
+		return (printf(" : export: `%s': not a valid identifier\n", str), 1);
 	i ++;
 	while (str[i] != '\0' && str[i] != '=')
 	{
 		if (str[i] == ' ')
-			return (printf("export: `%c': not a valid identifier \n",str[i - 1]),1);
-		if (ft_isalpha(str[i]) == 1 || str[i] == '_' 
+			return (printf("export: `%c': not a valid identifier \n",
+					str[i - 1]), 1);
+		if (ft_isalpha(str[i]) == 1 || str[i] == '_'
 			|| ft_isalnum(str[i]) == 1 || str[i])
 			i ++;
 		else
@@ -64,3 +65,14 @@ int	ft_isprint(int c)
 {
 	return (c >= ' ' && c <= '~');
 }
+
+void	ft_strnull(char **tab, size_t n)
+{
+	size_t i = 0;
+	while (i != n)
+	{
+		tab[i] = NULL;
+		i++;
+	}
+}
+

@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 14:30:16 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:48:57 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ int	get_fd(int oldfd, char *path, int flags[2], t_glob *g_global)
 	if (!path)
 		return (-1);
 	if (access(s, F_OK) == -1 && !flags[0])
-	{
-		// printf("dweawda\n");
 		ft_perror(NOT_DIR, path, 127, g_global);
-	}
 	else if (!flags[0] && access(s, R_OK) == -1)
 		ft_perror(NO_PERM, path, 126, g_global);
 	if (!flags[0] && flags[1])
@@ -119,11 +116,11 @@ t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global)
 	char	*aux[2];
 	char	*str[2];
 
-	str[0] = NULL;
-	str[1] = NULL;
+	ft_strnull(str, 2);
 	aux[0] = NULL;
 	aux[1] = "minishell: warning: here-document delimited by end-of-file";
-	if (args[(*i) + 2] && (args[(*i) + 2][0] == '<' || args[(*i) + 2][0] == '>'))
+	if (args[(*i) + 2] && (args[(*i) + 2][0] == '<'
+		|| args[(*i) + 2][0] == '>'))
 	{
 		print_error_heredoc(args[(*i) + 2][0], i, g_global);
 		return (node);
@@ -131,7 +128,7 @@ t_input	*get_pipein2(t_input *node, char **args, int *i, t_glob *g_global)
 	(*i)++;
 	if (args[++(*i)])
 	{
-		aux[0] = args[*i];
+		aux[0] = args[(*i)];
 		node->pipein = get_here_doc(str, aux, g_global);
 	}
 	if (!args[*i] || node->pipein == -1)

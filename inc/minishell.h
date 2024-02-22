@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 05:36:26 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:45:03 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void	print_error_heredoc(char c, int *i, t_glob *g_global);
 int		whath_is(char ***a, int *i);
 void	ft_close(int fd);
 int 	check_arg(char *str);
+void	ft_strnull(char **tab, size_t n);
 /*--[ft_matrix.c]--*/
 void	ft_free_matrix(char ***m);
 char	**ft_extend_matrix(char **in, char *newstr, t_glob *g_global);
