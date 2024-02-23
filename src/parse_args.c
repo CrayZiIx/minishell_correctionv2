@@ -59,57 +59,23 @@ static void	*parse_args(char **args, t_prompt *p, t_glob *g_global)
 	return (p);
 }
 
-int	check_token_pipe(char **a)
-{
-	if (!a || a[0][0] == '\0')
-		return (0);
-	if (a[0][0] == '|' || a[ft_matrixlen(a) - 1][0] == '|')
-	{
-		printf("message error\n");
-		return (1);
-	}
-	else
-		return (0);
-}
-
-int	check_token_redir(char **a, t_glob *g_global)
-{
-	int	n;
-
-	n = ft_matrixlen(a);
-	printf("[%c]\n", a[0][2]);
-	if (n == 1 && (((a[0][0] == '>' || a[0][0] == '<' ) || ((a[0][0] == '>' && a[0][1] == '>' ) || (a[0][0] == '>' && a[0][1] == '>'))) || (a[0][2] == '|')))
-		return (syntax_error(SYNTAXE_REDIR, NULL, g_global), 1);
-	else if (n == 2 && (((a[0][0] == '>' || a[0][0] == '<' )
-		|| ((a[0][0] == '>' && a[0][1] == '>' )
-		|| (a[0][0] == '>' && a[0][1] == '>'))))
-		&& a[1][0] == '|')
-		return (syntax_error(SYNTAXE_PIP, NULL, g_global), 1);
-	else if (n > 1 && (((a[n - 1][0] == '>' || a[n - 1][0] == '<' )
-		|| ((a[n - 1][0] == '>' && a[n - 1][1] == '>' )
-		|| (a[n - 1][0] == '>' && a[n - 1][1] == '>'))))
-		&& a[n - 1][0] == '|')
-		return (syntax_error(SYNTAXE_PIP, NULL, g_global), 1);
-	return (0);
-}
-
 void	*check_args(char *out, t_prompt *p, t_glob *g_global)
 {
 	char	**a;
 	t_input	*n;
 
 	if (!out)
-	{
-		printf("exit\n");
 		return (NULL);
-	}
 	if (out[0] != '\0')
 		add_history(out);
 	a = ft_cmdtrim(out, " ", g_global);
 	if (!a)
 		return (ft_perror(QUOTE, NULL, 1, g_global), "");
-	if (check_token_redir(a, g_global) || check_token_redir(a, g_global))
+	if (ft_matrixlen(a) == 1 && is_redir_like(a[0]) == 0)
+	{
+		syntax_error(SYNTAXE_REDIR, NULL, g_global);
 		return ("");
+	}
 	p = parse_args(a, p, g_global);
 	if (p && p->cmds)
 		n = p->cmds->content;

@@ -36,6 +36,11 @@ static char	*get_here_str(char *s[2], char *limit, char *warn, t_glob *g_global)
 	size_t				len;
 
 	len = 0;
+	if (ft_strcmp(limit,"|") == 0)
+	{
+		syntax_error(SYNTAXE_REDIR, NULL, g_global);
+		return ("");
+	}
 	while (g_global->g_state != 130 && (!s[0] || ft_strncmp(s[0], limit, len) \
 		|| ft_strlen(limit) != len))
 	{

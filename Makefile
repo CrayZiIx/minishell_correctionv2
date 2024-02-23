@@ -36,6 +36,7 @@ SRC	= main.c \
 		get_params.c \
 		heredoc.c \
 		parse_args.c \
+		parsing_utils.c \
 		signal.c \
 		builtins/builtins_1.c \
 		builtins/cmd.c \

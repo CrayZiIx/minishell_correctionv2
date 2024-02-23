@@ -170,5 +170,6 @@ char	**ft_cmdtrim(char const *s, char *set, t_glob *g_global);
 t_list	*fill_nodes(char **args, int i, t_glob *g_global);
 /*--[parse_args.c]--*/
 void	*check_args(char *out, t_prompt *p, t_glob *g_global);
+int		is_redir_like(char *str);
 
 #endif
