@@ -3,77 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmallet <gmallet@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:31:51 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/26 17:31:41 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/26 20:52:01 by gmallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	check_string_redir2(char *s, int *i, int *t)
+int	check_string_redir(char *s, int *i)
 {
-		if ((s[(*i)] == '>' && s[(*i) + 1] == '>') 
-			|| (s[(*i)] == '<' && s[(*i) + 1] == '<'))
+		if ((s[(*i)] == '>' && s[(*i) + 1] == '>') || (s[(*i)] == '<' && s[(*i) + 1] == '<'))
 		{
-			printf("s = [%s]\n", s);
 			(*i) += 2;
-			(*t) = SYNTAXE_NL;
-		}
-		else if (*t == 0 && (s[(*i)] == '>' || s[(*i)] == '<' 
-			|| s[(*i)] == '|'))
+			return SYNTAXE_NL;
+		}	
+		else if (s[*i] == '>' || s[*i] == '<')
 		{
-			printf("s2 = [%s]\n", s);
-			(*i) += 1;
-			if (s[(*i)] == '|')
-				(*t) = SYNTAXE_PIP;
-			(*t) = SYNTAXE_NL;
+			(*i)++;
+			return SYNTAXE_R;
 		}
-		else
-			if (*t && s[(*i)++] != ' ')
-				(*t) = 0;
-		return ((*t));
+		else if (s[*i] == '|')
+		{
+			(*i)++;
+			return SYNTAXE_PIP;
+		}
+		while (s[*i] && !ft_isspace(s[*i]))
+			(*i)++;
+		return 0;
 }
 
-int	check_string_redir(char *s)
+// SYNTAXE_PIP
+// SYNTAX_NIL
+
+int	check_string_redir_tab(char *s)
 {
 	int i;
 	int t;
+	int old;
 
 	i = 0;
-	t = 0;
-	if (s[0] == '|')
-		return (SYNTAXE_PIP);
+	old = 0;
 	while (s[i] != '\0')
 	{
-		printf("t = %d\n", t);
-		if (s[i] == '<' && s[i + 1] == '>')
-			return (0);
-		if (check_string_redir2(s, &i, &t))
+		while (s[i] && ft_isspace(s[i]))
+			i++;
+		if (s[i] == '\0')
+			break ;
+		t = check_string_redir(s, &i);
+		// printf("return from check string %s\n", s[i]);
+		if (old && t)
 		{
-			printf("t = %d\n", t);
-			continue ;
-		}
-		if (t)
+			if (old == truc && && t)
+				tamere la pute;	
 			return (t);
+		}
+		old = t;
 	}
-	return (0);
-}
-
-int	check_string_redir_tab(char **s, t_glob *g_global)
-{
-	int i;
-	int t;
-
-	i = 0;
-	while (s && s[i] && i <= 15)
-	{
-		t = check_string_redir(s[i]);
-		if (t)
-			return (syntax_error(t, s, g_global), 1);
-		i++;
-		t = 0;
-	}
-	return (0);
+	return (old);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmallet <gmallet@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 19:12:49 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/26 15:50:41 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:20:39 by gmallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int ac, char **av, char **envp)
 	char		*out;
 	t_prompt	prompt;
 	t_glob		g_global;
+	int t;
 
 	gc_init(&g_global.gc);
 	prompt = init_prompt(av, envp, &g_global);
@@ -87,6 +88,11 @@ int	main(int ac, char **av, char **envp)
 		signal(SIGQUIT, SIG_IGN);
 		out = readline("guest@minishell $ ");
 		signal(SIGINT, handle_sigint_cmd);
+		if ((t = check_string_redir_tab(out)))
+		{
+			syntax_error(t, NULL, &g_global);
+			continue ;
+		}
 		if (!check_args(out, &prompt, &g_global))
 			break ;
 		if (g_sig_int)

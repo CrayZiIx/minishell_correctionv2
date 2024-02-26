@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmallet <gmallet@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/26 16:00:23 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:20:15 by gmallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,6 @@ t_list	*fill_nodes(char **args, int i, t_glob *g_global);
 /*--[parse_args.c]--*/
 void	*check_args(char *out, t_prompt *p, t_glob *g_global);
 /*--[parse_args_utils.c]--*/
-int		check_string_redir_tab(char **s, t_glob *g_global);
+int		check_string_redir_tab(char *s);
 
 #endif

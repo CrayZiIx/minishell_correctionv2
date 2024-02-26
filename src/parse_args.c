@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmallet <gmallet@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/26 15:56:36 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:17:24 by gmallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,6 @@ void	*check_args(char *out, t_prompt *p, t_glob *g_global)
 	a = ft_cmdtrim(out, " ", g_global);
 	if (!a)
 		return (ft_perror(QUOTE, NULL, 1, g_global), "");
-	if (check_string_redir_tab(a, g_global))
-		return ("");
 	p = parse_args(a, p, g_global);
 	if (p && p->cmds)
 		n = p->cmds->content;
