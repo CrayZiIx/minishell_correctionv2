@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 17:29:28 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:00:23 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ typedef enum e_rl_error
 	MEM,
 	IS_DIR,
 	NOT_DIR,
-	SYNTAXE_REDIR,
+	SYNTAXE_DR,
+	SYNTAXE_R,
+	SYNTAXE_NL,
 	SYNTAXE_PIP
 }				t_rl_error;
 /*---------*/
@@ -170,5 +172,7 @@ char	**ft_cmdtrim(char const *s, char *set, t_glob *g_global);
 t_list	*fill_nodes(char **args, int i, t_glob *g_global);
 /*--[parse_args.c]--*/
 void	*check_args(char *out, t_prompt *p, t_glob *g_global);
+/*--[parse_args_utils.c]--*/
+int		check_string_redir_tab(char **s, t_glob *g_global);
 
 #endif

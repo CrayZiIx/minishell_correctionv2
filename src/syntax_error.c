@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:30:40 by mamottet          #+#    #+#             */
-/*   Updated: 2024/02/22 17:40:30 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:04:58 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ void	syntax_error(int err_type, char **param, t_glob *g_global)
 	else if (param)
 		tmp = ft_strjoin(param[0], ": ", g_global);
 	simple_put(tmp, 2);
-	if (err_type == SYNTAXE_REDIR)
+	if (err_type == SYNTAXE_NL)
 		ft_putendl_fd("syntax error near unexpected token `newline'", 2);
+	else if (err_type == SYNTAXE_R)
+		ft_putendl_fd("syntax error near unexpected token '>' or '<'", 2);
+	else if (err_type == SYNTAXE_DR)
+		ft_putendl_fd("syntax error near unexpected token '>>' or '<<'", 2);
 	else if (err_type == SYNTAXE_PIP)
 		ft_putendl_fd("syntax error near unexpected token `|'", 2);
 	else if (err_type == ARG_ERROR)
