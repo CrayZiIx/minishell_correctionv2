@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/26 16:00:23 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:12:39 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,8 @@ t_list	*fill_nodes(char **args, int i, t_glob *g_global);
 /*--[parse_args.c]--*/
 void	*check_args(char *out, t_prompt *p, t_glob *g_global);
 /*--[parse_args_utils.c]--*/
-int		check_string_redir_tab(char **s, t_glob *g_global);
+// int		check_string_redir_tab(char **s, t_glob *g_global);
+int		check_token_redir(char **s);
+int		check_string_redir(char **s);
 
 #endif

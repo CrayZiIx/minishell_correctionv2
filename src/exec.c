@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 02:27:04 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 05:45:47 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:37:05 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ static void	child_builtin(t_pt *pt, t_input *node, int l, t_list *cmd)
 	else if (is_builtins(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "env", l) && l == 3)
 		pt->g_global->g_state = ft_env(pt, cmd);
+	// else if (is_builtins(node) && node->full_cmd && \
+	// 	!ft_strncmp(*node->full_cmd, "exit", l) && l == 4)
+	// 	pt->g_global->g_state = ft_exit(pt, cmd);
 }
 
 static void	*child_redir(t_list *cmd, int fd[2], t_glob *g_global)

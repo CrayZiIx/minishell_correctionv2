@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 18:29:46 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 17:36:21 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:35:33 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	builtins(t_prompt *prompt, t_list *cmd, int *is_exit, t_glob *g_global)
 {
 	char	**a;
+		// if (a && !ft_strncmp(*a, "exit", ft_strlen("exit")) \
+		// 		&& ft_strlen("exit") == 4)
+		// 	g_global->g_state = ft_exit(cmd, is_exit);
 
 	while (cmd)
 	{
 		a = ((t_input *)cmd->content)->full_cmd;
-		if (a && !ft_strncmp(*a, "exit", ft_strlen("exit")) \
-				&& ft_strlen("exit") == 4)
-			g_global->g_state = ft_exit(cmd, is_exit);
-		else if (!cmd->next && a && !ft_strncmp(*a, "cd", ft_strlen("cd")) \
+		if (!cmd->next && a && !ft_strncmp(*a, "cd", ft_strlen("cd")) \
 				&& ft_strlen("cd") == 2)
 			g_global->g_state = ft_cd(prompt, g_global);
 		else if (!cmd->next && a \

@@ -6,13 +6,11 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/26 15:56:36 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:58:29 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-// extern t_glob	g_global;
 
 static char	**split_all(char **args, t_prompt *prompt, t_glob *g_global)
 {
@@ -72,57 +70,6 @@ int	check_token_pipe(char **a)
 		return (0);
 }
 
-// int	check_string_redir(char *s)
-// {
-// 	int i;
-// 	int t;
-
-// 	i = 0;
-// 	t = 0;
-// 	while (s[i] != '\0')
-// 	{
-// 		if (t == 1 && (s[i] == '>' || s[i]== '<'))
-// 			return (printf("error\n"), 1);
-// 		if ((s[i] == '>' && s[i + 1]== '>') || (s[i] == '<' && s[i + 1]== '<'))
-// 		{
-// 			i += 2;
-// 			t = 1;
-// 		}
-// 		else if (t == 0 && (s[i] == '>' || s[i] == '<' || s[i] == '|'))
-// 		{
-// 			i += 1;
-// 			t = 1;
-// 		}
-// 		else
-// 		{
-// 			i++;
-// 			if (s[i] != ' ')
-// 				t = 0;
-// 		}
-// 	}
-// 	return (t);
-// }
-
-// int	check_token_redir(char **a, t_glob *g_global)
-// {
-// 	int	n;
-
-// 	n = ft_matrixlen(a);
-// 	if (check_string_redir(a[0]))
-// 		return (syntax_error(SYNTAXE_REDIR, NULL, g_global), 1);
-// 	else if (n == 2 && (((a[0][0] == '>' || a[0][0] == '<' )
-// 		|| ((a[0][0] == '>' && a[0][1] == '>' )
-// 		|| (a[0][0] == '>' && a[0][1] == '>'))))
-// 		&& a[1][0] == '|')
-// 		return (syntax_error(SYNTAXE_PIP, NULL, g_global), 1);
-// 	else if (n > 1 && (((a[n - 1][0] == '>' || a[n - 1][0] == '<' )
-// 		|| ((a[n - 1][0] == '>' && a[n - 1][1] == '>' )
-// 		|| (a[n - 1][0] == '>' && a[n - 1][1] == '>'))))
-// 		&& a[n - 1][0] == '|')
-// 		return (syntax_error(SYNTAXE_PIP, NULL, g_global), 1);
-// 	return (0);
-// }
-
 void	*check_args(char *out, t_prompt *p, t_glob *g_global)
 {
 	char	**a;
@@ -138,7 +85,7 @@ void	*check_args(char *out, t_prompt *p, t_glob *g_global)
 	a = ft_cmdtrim(out, " ", g_global);
 	if (!a)
 		return (ft_perror(QUOTE, NULL, 1, g_global), "");
-	if (check_string_redir_tab(a, g_global))
+	if (!(!check_token_redir(a) && !check_string_redir(a)))
 		return ("");
 	p = parse_args(a, p, g_global);
 	if (p && p->cmds)

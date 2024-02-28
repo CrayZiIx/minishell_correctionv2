@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 04:44:47 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/21 05:38:42 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:13:09 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ static char	*get_substr_var(char *s, int i, t_prompt *prompt, t_glob *g_global)
 	else if (!var && s[i] == '?')
 		var = ft_itoa(g_global->g_state_old, &g_global->gc);
 	path = ft_strjoin(aux, var, &g_global->gc);
-	aux = ft_strjoin(path, &s[i + pos], &g_global->gc);
+	if (i + pos <= (int)ft_strlen(s))
+		aux = ft_strjoin(path, &s[i + pos], &g_global->gc);
+	else
+		aux = ft_strjoin(path, NULL, &g_global->gc);
 	return (aux);
 }
 

@@ -6,13 +6,12 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:28:57 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 14:25:03 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:34:54 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// int		g_global.g_state;
 int	g_sig_int;
 
 void	handle_sigint(int sig)

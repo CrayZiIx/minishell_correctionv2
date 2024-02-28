@@ -3,5 +3,6 @@ valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=
 
 
 Erreur :
-- pwd hsfbbfd (Pas de message d'erreur)
-- cat + ctrl backslash -> quitte
+
+EXIT DOIT PAS QUITTER DANS DES PIPES
+PARSER

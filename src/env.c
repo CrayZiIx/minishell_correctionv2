@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 00:02:33 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 17:31:01 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:52:19 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	var_in_envp(char *argv, char **envp, int ij[2])
 	ij[1] = 0;
 	pos = ft_strchr_i(argv, '=');
 	if (pos == -1)
-		return (-1);
+		pos = 0;
 	while (envp[ij[1]])
 	{
 		if (!ft_strncmp(envp[ij[1]], argv, pos + 1))

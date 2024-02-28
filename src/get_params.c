@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 18:26:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/22 15:48:57 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:34:34 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_fd(int oldfd, char *path, int flags[2], t_glob *g_global)
 		return (-1);
 	if (access(s, F_OK) == -1 && !flags[0])
 		ft_perror(NOT_DIR, path, 127, g_global);
-	else if (!flags[0] && access(s, R_OK) == -1)
+	if (!flags[0] && access(s, R_OK) == -1)
 		ft_perror(NO_PERM, path, 126, g_global);
 	if (!flags[0] && flags[1])
 		fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0666);
@@ -67,8 +67,8 @@ t_input	*get_pipeout2(t_input *node, char **args, int *i, t_glob *g_global)
 {
 	int	flags[2];
 
-	flags[0] = 0;
-	flags[1] = 1;
+	flags[0] = 1;
+	flags[1] = 0;
 	if (args[(*i) + 2] && (args[(*i) + 2][0] == '<' \
 		|| args[(*i) + 2][0] == '>'))
 	{
