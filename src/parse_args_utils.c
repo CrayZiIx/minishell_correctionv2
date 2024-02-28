@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 15:31:51 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/27 16:42:26 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:57:22 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ int	check_string_get_token(char *s)
 		{
 			if (s[i] == '|')
 				new_token = SYNTAXE_PIP;
-			else if (s[i] == '>' || s[i] == '<')
-				new_token = SYNTAXE_R;
 			else if (s[++i] != '\0' && (s[i] == '>' || s[i] == '<'))
 				new_token = SYNTAXE_DR;
+			else if (s[--i] == '>' || s[i] == '<')
+				new_token = SYNTAXE_R;
 		}
 		else
 			new_token = 0;
@@ -89,17 +89,21 @@ int	check_string_get_token(char *s)
 
 int	check_string_redir(char **s)
 {
+	int	old_token;
 	int	string_token;
 	int	i;
 
 	i = 0;
+	old_token = 0;
 	while (s && s[i])
 	{
 		if (s[i])
 			string_token = check_string_get_token(s[i]);
 		i++;
-		if (string_token && (i == (ft_matrixlen(s))))
+		if (string_token && (string_token == SYNTAXE_PIP \
+			|| i == (ft_matrixlen(s))))
 			return (printf("error string\n"), string_token);
+		old_token = string_token;
 	}
 	return (0);
 }

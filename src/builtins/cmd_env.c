@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 15:50:59 by mamottet          #+#    #+#             */
-/*   Updated: 2024/02/27 17:43:02 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:22:54 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_export(t_prompt *prompt, t_glob *g_global)
 	char	**argv;
 
 	argv = ((t_input *)prompt->cmds->content)->full_cmd;
-	ft_putmatrix_fd(argv, 1, 1);
 	if (ft_matrixlen(argv) >= 2 && argv[1] != NULL && check_arg(argv[1]) == 0)
 	{
 		ij[0] = 1;

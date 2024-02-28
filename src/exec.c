@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 02:27:04 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/27 18:37:05 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:02:48 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	child_builtin(t_pt *pt, t_input *node, int l, t_list *cmd)
 	signal(SIGQUIT, SIG_DFL);
 	if (!is_builtins(node) && node->full_cmd)
 		execve(node->full_path, node->full_cmd, pt->prompt->envp);
-	else if (is_builtins(node) && node->full_cmd \
-		&& !ft_strncmp(*node->full_cmd, "pwd", l) && l == 3)
+	else if (is_builtins(node) && node->full_cmd && \
+		!ft_strncmp(*node->full_cmd, "pwd", l) && l == 3)
 		pt->g_global->g_state = ft_pwd();
 	else if (is_builtins(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "echo", l) && l == 4)
@@ -29,10 +29,13 @@ static void	child_builtin(t_pt *pt, t_input *node, int l, t_list *cmd)
 	else if (is_builtins(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "env", l) && l == 3)
 		pt->g_global->g_state = ft_env(pt, cmd);
+	else if (is_builtins(node) && node->full_cmd && \
+		!ft_strncmp(*node->full_cmd, "export", l) && l == 6)
+		pt->g_global->g_state = ft_export(pt->prompt, pt->g_global);
+}
 	// else if (is_builtins(node) && node->full_cmd && \
 	// 	!ft_strncmp(*node->full_cmd, "exit", l) && l == 4)
 	// 	pt->g_global->g_state = ft_exit(pt, cmd);
-}
 
 static void	*child_redir(t_list *cmd, int fd[2], t_glob *g_global)
 {

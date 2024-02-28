@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   logger_internal.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: liguyon <ligyuon@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 17:15:56 by liguyon           #+#    #+#             */
-/*   Updated: 2023/07/10 18:43:04 by liguyon          ###   ########.fr       */
+/*   Created: 2024/02/28 14:33:46 by jolecomt          #+#    #+#             */
+/*   Updated: 2024/02/28 14:33:47 by jolecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
