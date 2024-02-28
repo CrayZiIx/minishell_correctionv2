@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 21:31:58 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/27 16:58:29 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/28 23:04:17 by mamottet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	*check_args(char *out, t_prompt *p, t_glob *g_global)
 	a = ft_cmdtrim(out, " ", g_global);
 	if (!a)
 		return (ft_perror(QUOTE, NULL, 1, g_global), "");
-	if (!(!check_token_redir(a) && !check_string_redir(a)))
+	if (!(!check_token_redir(a,g_global) && !check_string_redir(a, g_global)))
 		return ("");
 	p = parse_args(a, p, g_global);
 	if (p && p->cmds)

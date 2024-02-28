@@ -6,7 +6,7 @@
 /*   By: jolecomt <jolecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:58:29 by jolecomt          #+#    #+#             */
-/*   Updated: 2024/02/27 14:12:39 by jolecomt         ###   ########.fr       */
+/*   Updated: 2024/02/28 23:02:32 by mamottet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ typedef enum e_rl_error
 	SYNTAXE_DR,
 	SYNTAXE_R,
 	SYNTAXE_NL,
-	SYNTAXE_PIP
+	SYNTAXE_PIP,
+	PARS_ERROR	
 }				t_rl_error;
 /*---------*/
 /*FUNCTIONS*/
@@ -174,7 +175,7 @@ t_list	*fill_nodes(char **args, int i, t_glob *g_global);
 void	*check_args(char *out, t_prompt *p, t_glob *g_global);
 /*--[parse_args_utils.c]--*/
 // int		check_string_redir_tab(char **s, t_glob *g_global);
-int		check_token_redir(char **s);
-int		check_string_redir(char **s);
+int		check_token_redir(char **s, t_glob *g_global);
+int		check_string_redir(char **s, t_glob *g_global);
 
 #endif

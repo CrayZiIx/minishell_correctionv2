@@ -17,6 +17,14 @@ void	simple_put(char *str, int fd)
 	ft_putstr_fd(str, fd);
 }
 
+void	pars_error(char *str)
+{
+	if (str[0] == '<')
+		ft_putendl_fd("minishell: syntax error near unexpected token `<<'", 2);
+	else
+		ft_putendl_fd("minishell: syntax error near unexpected token `>>'", 2);
+}
+
 void	syntax_error(int err_type, char **param, t_glob *g_global)
 {
 	char	*tmp;
@@ -29,13 +37,15 @@ void	syntax_error(int err_type, char **param, t_glob *g_global)
 		tmp = ft_strjoin(param[0], ": ", g_global);
 	simple_put(tmp, 2);
 	if (err_type == SYNTAXE_NL)
-		ft_putendl_fd("syntax error near unexpected token `newline'", 2);
+		ft_putendl_fd("minishell: syntax error near unexpected token `newline'", 2);
 	else if (err_type == SYNTAXE_R)
-		ft_putendl_fd("syntax error near unexpected token '>' or '<'", 2);
+		ft_putendl_fd("minishell: syntax error near unexpected token test '>' or '<'", 2);
 	else if (err_type == SYNTAXE_DR)
-		ft_putendl_fd("syntax error near unexpected token '>>' or '<<'", 2);
+		ft_putendl_fd("minishell: syntax error near unexpected token '>>' or '<<'", 2);
 	else if (err_type == SYNTAXE_PIP)
-		ft_putendl_fd("syntax error near unexpected token `|'", 2);
+		ft_putendl_fd("minishell: syntax error near unexpected token `|'", 2);
 	else if (err_type == ARG_ERROR)
-		ft_putendl_fd("too many arguments", 2);
+		ft_putendl_fd("minishell: too many arguments", 2);
+	else if (err_type == PARS_ERROR)
+		pars_error(param[0]);
 }
